@@ -1,10 +1,10 @@
 import './App.css';
 
-import HikingSheet from './hikingSheet/HickingSheet';
+import HikingMap from './hikingMap/HikingMap';
 
 function App() {
   return (
-    <HikingSheet/>
+    <HikingMap/>
   );
 }
 
