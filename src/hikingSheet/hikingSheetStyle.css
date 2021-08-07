@@ -1,0 +1,63 @@
+.hikingData {
+  border: brown 4px solid;
+}
+
+.hikingSheetImage {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 50px;
+}
+
+.hikingData {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 50px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.participantsBox {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 50px;
+}
+
+.descBox {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 50px;
+}
+
+.bottomTitle {
+  margin-bottom: 30px;
+  color: brown;
+}
+
+@media all and (min-width: 1400px) {
+  .hikingBox {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hikingSheetImage {
+    width: 30%;
+    margin: 70px;
+  }
+
+  .hikingData {
+    width: 30%;
+    margin: 70px;
+  }
+
+  .participantsBox {
+    width: 30%;
+    margin: 70px;
+  }
+
+  .descBox {
+    width: 30%;
+    margin: 70px;
+  }
+}

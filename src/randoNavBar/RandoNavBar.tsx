@@ -25,7 +25,7 @@ export default function RandoNavBar(props) {
             Participants
           </Nav.Link>
           <Nav.Link href="#" className="navItemRando">
-            Connection
+            Connexion
           </Nav.Link>
         </Navbar>
 

@@ -3,7 +3,7 @@ import CardPlace from "./components/CardPlace";
 export default function PlacesScreen(props) {
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Lieux de randonée</h1>
+      <h1 className="hikingTitle">Lieux de randonnée</h1>
       <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         <CardPlace />
         <CardPlace />
