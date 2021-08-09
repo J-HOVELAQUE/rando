@@ -1,16 +1,7 @@
-import CardPlace from "./components/CardPlace";
+import CardPlace, { Place } from "./components/CardPlace";
 import { useEffect, useState } from "react";
 
 const endPoint: string = "localhost:3000";
-
-interface Place {
-  id: string;
-  name: string;
-  altitudeInMeters: number;
-  mountainLocation: string;
-  city?: string;
-  picture?: string;
-}
 
 export default function PlacesScreen(props) {
   const [places, setPlaces] = useState([]);
@@ -29,6 +20,7 @@ export default function PlacesScreen(props) {
     }
     getPlaces();
   }, []);
+
   return (
     <>
       <h1 className="hikingTitle">Lieux de randonnée</h1>
@@ -40,19 +32,9 @@ export default function PlacesScreen(props) {
           justifyContent: "center",
         }}
       >
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
-        <CardPlace />
+        {places.map((place: Place) => {
+          return <CardPlace key={place._id} placeData={place} />;
+        })}
       </div>
     </>
   );
