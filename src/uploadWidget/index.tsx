@@ -15,9 +15,6 @@ export default function UploadWidget(props) {
       method: "POST",
       body: data,
     });
-
-    console.log(">>>>>", fileToUpload);
-    console.log(">>>COCO", answerRaw);
   };
 
   return (

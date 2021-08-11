@@ -2,7 +2,7 @@ import { Card, Button } from "react-bootstrap";
 import "./cardStyle.css";
 
 export interface Place {
-  _id: string;
+  _id?: string;
   name: string;
   altitudeInMeters: number;
   mountainLocation: string;

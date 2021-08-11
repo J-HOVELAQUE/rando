@@ -1,10 +1,13 @@
 import CardPlace, { Place } from "./components/CardPlace";
 import { useEffect, useState } from "react";
+import CreatePlaceModal from "./components/CreatePlaceModal";
+import "./placeScreenStyle.css";
 
 const endPoint: string = "localhost:3000";
 
 export default function PlacesScreen(props) {
   const [places, setPlaces] = useState([]);
+  const [createPlace, setCreatePlace] = useState(false);
 
   useEffect(() => {
     async function getPlaces() {
@@ -21,9 +24,17 @@ export default function PlacesScreen(props) {
     getPlaces();
   }, []);
 
+  const handleClose = () => setCreatePlace(false);
+  const handleShow = () => setCreatePlace(true);
+
   return (
     <>
+      <CreatePlaceModal createPlace={createPlace} handleClose={handleClose} />
+
       <h1 className="hikingTitle">Lieux de randonnée</h1>
+      <button className="addPlace" onClick={() => handleShow()}>
+        Ajouter un lieu
+      </button>
       <div
         style={{
           display: "flex",

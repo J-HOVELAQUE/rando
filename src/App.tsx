@@ -7,16 +7,9 @@ import UploadWidget from "./uploadWidget/uploadBis";
 function App() {
   return (
     <>
-      {/* <Router history={history}>
-        <RandoNavBar />
-        <Switch>
-          <Route path="/" exact component={PlacesScreen} />
-          <Route path="/hiking-sheet" exact component={HikingMap} />
-        </Switch>
-        <PlacesScreen />
-      </Router> */}
+      <RandoNavBar />
 
-      <UploadWidget />
+      {/* <UploadWidget /> */}
     </>
   );
 }
