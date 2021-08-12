@@ -12,14 +12,13 @@ export interface Place {
 
 export default function CardPlace(props) {
   const placeData: Place = props.placeData;
+  const pictureUrl: string =
+    placeData.picture ||
+    "https://res.cloudinary.com/dhov1sjr7/image/upload/v1628781274/rando/places/montain_default_fenksx.jpg";
 
   return (
     <Card style={{ width: "18rem", margin: "15px" }} border="dark">
-      <Card.Img
-        variant="top"
-        // src="https://res.cloudinary.com/dhov1sjr7/image/upload/v1628178101/chalune_za0zd4.jpg"
-        src="./chalune2.jpg"
-      />
+      <Card.Img variant="top" src={pictureUrl} />
       <Card.Body>
         <Card.Title bsPrefix="title-place">{placeData.name}</Card.Title>
         <Card.Text>Massif: {placeData.mountainLocation}</Card.Text>

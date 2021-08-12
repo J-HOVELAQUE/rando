@@ -10,21 +10,25 @@ export default function PlacesScreen(props) {
   const [createPlace, setCreatePlace] = useState(false);
 
   useEffect(() => {
-    async function getPlaces() {
-      const rawAnswer = await fetch("http://localhost:3000/place", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const answer = await rawAnswer.json();
-      setPlaces(answer.places);
-    }
     getPlaces();
   }, []);
 
-  const handleClose = () => setCreatePlace(false);
+  async function getPlaces() {
+    const rawAnswer = await fetch("http://localhost:3000/place", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const answer = await rawAnswer.json();
+    setPlaces(answer.places);
+  }
+
+  const handleClose = () => {
+    setCreatePlace(false);
+    getPlaces();
+  };
   const handleShow = () => setCreatePlace(true);
 
   return (

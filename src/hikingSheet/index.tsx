@@ -9,8 +9,8 @@ export default function HikingSheet() {
         <h1 className="hikingTitle">Sortie à la Pointe de Chalune</h1>
         <div className="hikingBox">
           <img
-            // src="https://res.cloudinary.com/dhov1sjr7/image/upload/v1628178101/chalune_za0zd4.jpg"
-            src="./resized.jpg"
+            src="https://res.cloudinary.com/dhov1sjr7/image/upload/v1628779080/lgthsdoahh4ijx4zvxmr.jpg"
+            // src="./resized.jpg"
             alt="une photo du lieu de la randonée"
             className="hikingSheetImage"
           ></img>
