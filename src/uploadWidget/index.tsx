@@ -10,7 +10,8 @@ export default function UploadWidget(props) {
     }
     e.preventDefault();
     const data = new FormData();
-    data.append("file", fileToUpload);
+    data.append("Autre info", "J'y arrive");
+    data.append("fileProut", fileToUpload);
     const answerRaw = await fetch("http://localhost:3000/place/picture", {
       method: "POST",
       body: data,

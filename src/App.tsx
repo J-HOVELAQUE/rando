@@ -2,14 +2,16 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import RandoNavBar from "./randoNavBar/RandoNavBar";
-import UploadWidget from "./uploadWidget/uploadBis";
+import UploadWidget1 from "./uploadWidget/uploadBis";
+import UploadWidget from "./uploadWidget";
 
 function App() {
   return (
     <>
       <RandoNavBar />
 
-      {/* <UploadWidget /> */}
+      {/* <UploadWidget></UploadWidget> */}
+      {/* <UploadWidget1 /> */}
     </>
   );
 }
