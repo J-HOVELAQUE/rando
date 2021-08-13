@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CreatePlaceModal from "./components/CreatePlaceModal";
 import "./placeScreenStyle.css";
 
-const endPoint: string = "localhost:3000";
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 export default function PlacesScreen(props) {
   const [places, setPlaces] = useState([]);
@@ -14,7 +14,12 @@ export default function PlacesScreen(props) {
   }, []);
 
   async function getPlaces() {
-    const rawAnswer = await fetch("http://localhost:3000/place", {
+    console.log(">>>>URL", serverUrl);
+    if (serverUrl === undefined) {
+      return;
+    }
+
+    const rawAnswer = await fetch(serverUrl + "/place", {
       method: "GET",
       headers: {
         Accept: "application/json",
