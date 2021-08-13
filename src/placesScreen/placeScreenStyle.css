@@ -1,7 +1,14 @@
-.addPlace {
+.add-place-button {
   color: white;
   background-color: brown;
   padding: 5px;
   margin: 0px auto 20px 50px;
   border-radius: 10px;
+}
+
+.card-place-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }

@@ -12,9 +12,7 @@ export interface Place {
 
 export default function CardPlace(props) {
   const placeData: Place = props.placeData;
-  const pictureUrl: string =
-    placeData.picture ||
-    "https://res.cloudinary.com/dhov1sjr7/image/upload/v1628781274/rando/places/montain_default_fenksx.jpg";
+  const pictureUrl: string = placeData.picture || "/montain_default.jpg";
 
   return (
     <Card className="card-place">

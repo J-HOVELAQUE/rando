@@ -6,15 +6,14 @@ export default function HikingSheet() {
   return (
     <>
       <div className="display">
-        <h1 className="hikingTitle">Sortie à la Pointe de Chalune</h1>
-        <div className="hikingBox">
+        <h1 className="hiking-title">Sortie à la Pointe de Chalune</h1>
+        <div className="hiking-box">
           <img
-            src="https://res.cloudinary.com/dhov1sjr7/image/upload/v1628779080/lgthsdoahh4ijx4zvxmr.jpg"
-            // src="./resized.jpg"
+            src="/montain_default.jpg"
             alt="une photo du lieu de la randonée"
-            className="hikingSheetImage"
+            className="hiking-sheet-image"
           ></img>
-          <div className="hikingData">
+          <div className="hiking-data">
             <h3>Dénivelé cumulé: 500m</h3>
             <h3>Distance: 7km</h3>
             <h3>Altitude de départ: 1500m</h3>
@@ -23,10 +22,10 @@ export default function HikingSheet() {
             <h3>Date de la sortie: 27 juillet 2021</h3>
           </div>
         </div>
-        <div className="hikingBox">
-          <div className="participantsBox">
-            <h3 className="bottomTitle">Participants: </h3>
-            <ListGroup className="participantsList">
+        <div className="hiking-box">
+          <div className="participants-box">
+            <h3 className="hiking-sheet-bottom-title">Participants: </h3>
+            <ListGroup>
               <ListGroup.Item className="participant">
                 Julien Hovelaque
               </ListGroup.Item>
@@ -34,8 +33,8 @@ export default function HikingSheet() {
               <ListGroup.Item>Marie Golotte</ListGroup.Item>
             </ListGroup>
           </div>
-          <div className="descBox">
-            <h3 className="bottomTitle">Description: </h3>
+          <div className="desc-box">
+            <h3 className="hiking-sheet-bottom-title">Description: </h3>
             <p>C'était très beau et on s'est bien amusé.</p>
           </div>
         </div>

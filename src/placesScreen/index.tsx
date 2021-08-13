@@ -35,18 +35,11 @@ export default function PlacesScreen(props) {
     <>
       <CreatePlaceModal createPlace={createPlace} handleClose={handleClose} />
 
-      <h1 className="hikingTitle">Lieux de randonnée</h1>
-      <button className="addPlace" onClick={() => handleShow()}>
+      <h1 className="hiking-title">Lieux de randonnée</h1>
+      <button className="add-place-button" onClick={() => handleShow()}>
         Ajouter un lieu
       </button>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
+      <div className="card-place-container">
         {places.map((place: Place) => {
           return <CardPlace key={place._id} placeData={place} />;
         })}

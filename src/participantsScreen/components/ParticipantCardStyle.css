@@ -1,18 +1,18 @@
-.participantPortrait {
+.participant-portrait {
   width: 180px;
   height: 180px;
   border-radius: 100%;
   margin: 10px;
 }
 
-.participantCard {
+.participant-card {
   border: brown 2px solid;
   display: flex;
   width: 32rem;
   margin: 15px;
   border-radius: 10px;
 }
-.participantData {
+.participant-data {
   margin-left: 20px;
   display: flex;
   flex-direction: column;

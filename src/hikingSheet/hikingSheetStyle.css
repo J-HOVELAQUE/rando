@@ -1,14 +1,10 @@
-.hikingData {
-  border: brown 4px solid;
-}
-
-.hikingSheetImage {
+.hiking-sheet-image {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
 }
 
-.hikingData {
+.hiking-data {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
@@ -16,47 +12,49 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border: brown 4px solid;
+  border-radius: 10px;
 }
 
-.participantsBox {
+.participants-box {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
 }
 
-.descBox {
+.desc-box {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
 }
 
-.bottomTitle {
+.hiking-sheet-bottom-title {
   margin-bottom: 30px;
   color: brown;
 }
 
 @media all and (min-width: 1400px) {
-  .hikingBox {
+  .hiking-box {
     display: flex;
     justify-content: center;
   }
 
-  .hikingSheetImage {
+  .hiking-sheet-image {
     width: 30%;
     margin: 70px;
   }
 
-  .hikingData {
+  .hiking-data {
     width: 30%;
     margin: 70px;
   }
 
-  .participantsBox {
+  .participants-box {
     width: 30%;
     margin: 70px;
   }
 
-  .descBox {
+  .desc-box {
     width: 30%;
     margin: 70px;
   }
