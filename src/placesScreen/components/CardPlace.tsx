@@ -17,10 +17,10 @@ export default function CardPlace(props) {
     "https://res.cloudinary.com/dhov1sjr7/image/upload/v1628781274/rando/places/montain_default_fenksx.jpg";
 
   return (
-    <Card style={{ width: "18rem", margin: "15px" }} border="dark">
-      <Card.Img variant="top" src={pictureUrl} />
+    <Card className="card-place">
+      <Card.Img variant="top" src={pictureUrl} className="card-place-picture" />
       <Card.Body>
-        <Card.Title bsPrefix="title-place">{placeData.name}</Card.Title>
+        <Card.Title bsPrefix="card-place-title">{placeData.name}</Card.Title>
         <Card.Text>Massif: {placeData.mountainLocation}</Card.Text>
         <Card.Text>Altitude: {placeData.altitudeInMeters}m</Card.Text>
       </Card.Body>

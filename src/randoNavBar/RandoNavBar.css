@@ -1,9 +1,10 @@
-.navItemRando {
+.nav-item-rando {
   color: aliceblue;
 }
 
-.navContainer {
+.nav-container-rando {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: brown;
 }

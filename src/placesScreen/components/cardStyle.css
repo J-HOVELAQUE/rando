@@ -1,6 +1,17 @@
-.title-place {
+.card-place-title {
   color: brown;
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.card-place {
+  width: 18rem;
+  margin: 15px;
+  border: brown 2px solid;
+  border-radius: 10px;
+}
+
+.card-place-picture {
+  border-radius: 10px 10px 0px 0px;
 }

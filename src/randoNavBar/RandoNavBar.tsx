@@ -11,20 +11,20 @@ export default function RandoNavBar(props) {
   return (
     <>
       <BrowserRouter>
-        <Navbar bg="dark" variant="dark" className="navContainer">
-          <Nav.Link href="/" className="navItemRando">
+        <Navbar variant="dark" className="nav-container-rando">
+          <Nav.Link href="/" className="nav-item-rando">
             Home
           </Nav.Link>
-          <Nav.Link href="/lieux" className="navItemRando">
+          <Nav.Link href="/lieux" className="nav-item-rando">
             Lieux
           </Nav.Link>
-          <Nav.Link href="/rando" className="navItemRando">
+          <Nav.Link href="/rando" className="nav-item-rando">
             Rando
           </Nav.Link>
-          <Nav.Link href="/participants" className="navItemRando">
+          <Nav.Link href="/participants" className="nav-item-rando">
             Participants
           </Nav.Link>
-          <Nav.Link href="#" className="navItemRando">
+          <Nav.Link href="#" className="nav-item-rando">
             Connexion
           </Nav.Link>
         </Navbar>
