@@ -9,7 +9,8 @@ interface PlaceToRecord {
   mountainLocation: string;
   picture: File | null;
 }
-export default async function (
+
+export default async function createPlace(
   placeToRecord: PlaceToRecord
 ): Promise<OutcomeFailure | OutcomeSuccess<Place[]>> {
   if (serverUrl === undefined) {
@@ -38,7 +39,7 @@ export default async function (
   if (!rawAnswer.ok) {
     return {
       outcome: "FAILURE",
-      errorCode: "NO_SERVER_RESPONSE",
+      errorCode: "BAD_REQUEST",
       detail: answer,
     };
   }

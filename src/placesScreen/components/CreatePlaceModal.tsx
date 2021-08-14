@@ -2,8 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./createPlaceModalStyle.css";
 import { Place } from "./CardPlace";
-
-const endPoint: string = "localhost:3000";
+import createPlace from "../ajaxHandler/createPlace";
 
 type SelectedFile = File | null;
 
@@ -36,26 +35,20 @@ export default function CreatePlaceModal(props) {
   ): Promise<void> => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("name", placeName);
-    data.append("altitudeInMeters", placeAltitude.toString());
-    data.append("mountainLocation", placeMountainLocation);
-
-    if (selectedFile !== null) {
-      data.append("placePicture", selectedFile);
-    }
-
-    const rawAnswer = await fetch("http://localhost:3000/place", {
-      method: "POST",
-      body: data,
+    const recordStatus = await createPlace({
+      name: placeName,
+      mountainLocation: placeMountainLocation,
+      altitudeInMeters: placeAltitude,
+      picture: selectedFile,
     });
 
-    if (rawAnswer.ok) {
-      resetState();
-    } else {
-      const answer = await rawAnswer.json();
-      alert(answer.error);
+    if (recordStatus.outcome === "FAILURE") {
+      alert(recordStatus.errorCode + recordStatus.detail);
+      return;
     }
+
+    resetState();
+    props.handleClose();
   };
 
   return (
