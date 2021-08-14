@@ -1,39 +1,34 @@
-import CardPlace, { Place } from "./components/CardPlace";
+import CardPlace from "./components/CardPlace";
+import { Place } from "../interfaces/place";
 import { useEffect, useState } from "react";
 import CreatePlaceModal from "./components/CreatePlaceModal";
+import getPlaces from "./ajaxHandler/getPlace";
 import "./placeScreenStyle.css";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-
 export default function PlacesScreen(props) {
-  const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState<Place[]>([]);
   const [createPlace, setCreatePlace] = useState(false);
 
   useEffect(() => {
-    getPlaces();
+    getPlacesInState();
   }, []);
 
-  async function getPlaces() {
-    console.log(">>>>URL", serverUrl);
-    if (serverUrl === undefined) {
+  async function getPlacesInState() {
+    const placeResponse = await getPlaces();
+
+    if (placeResponse.outcome === "SUCCESS") {
+      setPlaces(placeResponse.data);
       return;
     }
 
-    const rawAnswer = await fetch(serverUrl + "/place", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    const answer = await rawAnswer.json();
-    setPlaces(answer.places);
+    alert(placeResponse.errorCode);
   }
 
   const handleClose = () => {
     setCreatePlace(false);
-    getPlaces();
+    getPlacesInState();
   };
+
   const handleShow = () => setCreatePlace(true);
 
   return (
