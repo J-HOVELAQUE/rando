@@ -7,7 +7,7 @@ export interface OutcomeFailure {
   /**
    * The explanation why the error happened.
    */
-  reason?: string;
+  detail?: string;
   /**
    * You can put anything usefull to understand the error.
    * You should not let it to any and type it in your implementation.

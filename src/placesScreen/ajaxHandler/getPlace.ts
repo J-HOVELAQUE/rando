@@ -22,7 +22,6 @@ export default async function getPlaces(): Promise<
   });
 
   if (!rawAnswer.ok) {
-    console.log("PROBLEME");
     return {
       outcome: "FAILURE",
       errorCode: "NO_SERVER_RESPONSE",
