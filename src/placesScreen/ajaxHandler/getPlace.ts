@@ -28,10 +28,11 @@ export default async function getPlaces(): Promise<
       errorCode: "NO_SERVER_RESPONSE",
     };
   }
+
   const answer = await rawAnswer.json();
 
   return {
     outcome: "SUCCESS",
-    data: answer,
+    data: answer.places,
   };
 }
