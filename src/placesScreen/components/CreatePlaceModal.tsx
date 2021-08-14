@@ -8,17 +8,22 @@ const endPoint: string = "localhost:3000";
 type SelectedFile = File | null;
 
 export default function CreatePlaceModal(props) {
-  const [placeName, setPlaceName] = useState("");
-  const [placeAltitude, setPlaceAltitude] = useState(0);
-  const [placeMountainLocation, setPlaceMountainLocation] = useState("");
+  const [placeName, setPlaceName] = useState<string>("");
+  const [placeAltitude, setPlaceAltitude] = useState<number>(0);
+  const [placeMountainLocation, setPlaceMountainLocation] =
+    useState<string>("");
   const [selectedFile, setSelectedFile] = useState<SelectedFile>(null);
 
-  const onChangePictureHandler = (event) => {
+  const onChangePictureHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    if (event.target.files === null) {
+      return;
+    }
     setSelectedFile(event.target.files[0]);
-    console.log(event.target.files[0]);
   };
 
-  const onAbortPlaceCreation = () => {
+  const resetState = (): void => {
     setPlaceName("");
     setPlaceAltitude(0);
     setPlaceMountainLocation("");
@@ -26,14 +31,10 @@ export default function CreatePlaceModal(props) {
     props.handleClose();
   };
 
-  const onSubmitNewPlace = async (e) => {
+  const onSubmitNewPlace = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-
-    const newPlace: Place = {
-      name: placeName,
-      altitudeInMeters: placeAltitude,
-      mountainLocation: placeMountainLocation,
-    };
 
     const data = new FormData();
     data.append("name", placeName);
@@ -50,11 +51,7 @@ export default function CreatePlaceModal(props) {
     });
 
     if (rawAnswer.ok) {
-      setPlaceName("");
-      setPlaceAltitude(0);
-      setPlaceMountainLocation("");
-      setSelectedFile(null);
-      props.handleClose();
+      resetState();
     } else {
       const answer = await rawAnswer.json();
       alert(answer.error);
@@ -123,7 +120,7 @@ export default function CreatePlaceModal(props) {
         <Modal.Footer>
           <button
             type="button"
-            onClick={onAbortPlaceCreation}
+            onClick={resetState}
             className="abortCreatePlaceButton"
           >
             Annuler
