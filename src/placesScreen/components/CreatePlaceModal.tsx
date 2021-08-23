@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./createPlaceModalStyle.css";
-import { Place } from "./CardPlace";
 import createPlace from "../ajaxHandler/createPlace";
 
 type SelectedFile = File | null;
@@ -64,6 +63,7 @@ export default function CreatePlaceModal(props) {
             Ajouter un nouveau lieu
           </Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <label className="createPlaceLabel">
             Nom
@@ -110,6 +110,7 @@ export default function CreatePlaceModal(props) {
             />
           </label>
         </Modal.Body>
+
         <Modal.Footer>
           <button
             type="button"
