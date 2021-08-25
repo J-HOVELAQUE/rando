@@ -1,8 +1,18 @@
 import ListGroup from "react-bootstrap/ListGroup";
+import { Hike } from "../interfaces/hike";
+import RootState from "../reducers/interface";
 import "./hikingSheetStyle.css";
 import "../App.css";
 
-export default function HikingSheet() {
+import { connect, DefaultRootState } from "react-redux";
+
+interface HikingSheetProps {
+  activeHike: Hike | null;
+}
+
+function HikingSheet({ activeHike }: HikingSheetProps) {
+  console.log(">>>>>>>HIKE_SELECTED", activeHike);
+
   return (
     <>
       <div className="display">
@@ -42,3 +52,11 @@ export default function HikingSheet() {
     </>
   );
 }
+
+function mapStateToProps(state: RootState) {
+  return {
+    activeHike: state.activeHike,
+  };
+}
+
+export default connect(mapStateToProps, null)(HikingSheet);
