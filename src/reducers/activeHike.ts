@@ -6,7 +6,7 @@ interface ActiveHikeAction extends Action {
 }
 
 export default function (
-  activeHike: Hike | undefined = undefined,
+  activeHike: Hike | null = null,
   action: ActiveHikeAction
 ) {
   switch (action.type) {
