@@ -1,7 +1,7 @@
 export default interface Participant {
   _id?: string;
   /**
-   * The place may not have id if not already record in database
+   * The participant may not have id if not already record in database
    */
 
   name: string;
