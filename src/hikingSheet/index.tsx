@@ -4,7 +4,7 @@ import RootState from "../reducers/interface";
 import "./hikingSheetStyle.css";
 import "../App.css";
 
-import { connect, DefaultRootState } from "react-redux";
+import { connect } from "react-redux";
 
 interface HikingSheetProps {
   activeHike: Hike | null;

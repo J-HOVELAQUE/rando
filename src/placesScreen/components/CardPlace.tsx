@@ -9,13 +9,14 @@ import { Place } from "../../interfaces/place";
 import { Hike } from "../../interfaces/hike";
 import { OutcomeSuccess, OutcomeFailure } from "../../interfaces/outcomes";
 import ListGroup from "react-bootstrap/ListGroup";
+import { connect, DispatchProp } from "react-redux";
+import RootState from "../../reducers/interface";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
-function popover(placeId: string) {
+function popover(props) {
+  const placeId = props.placeId;
   const [hikesForThisPlace, setHikesForThisPlace] = useState<Hike[]>([]);
-
-  console.log(">>>>>STATE", hikesForThisPlace);
 
   const getHikesForThisPlace = async (): Promise<
     OutcomeFailure | OutcomeSuccess<Hike[]>
@@ -27,13 +28,16 @@ function popover(placeId: string) {
       };
     }
 
-    const rawAnswer: Response = await fetch(serverUrl + "/hike/" + placeId, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    const rawAnswer: Response = await fetch(
+      serverUrl + "/hike/byPlace/" + placeId,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!rawAnswer.ok) {
       return {
@@ -65,6 +69,29 @@ function popover(placeId: string) {
     setHikesForThisPlaceInState();
   }, []);
 
+  const loadingHike = async (hikeId: string | undefined) => {
+    if (hikeId === undefined) {
+      return;
+    }
+
+    const rawAnswer: Response = await fetch(serverUrl + "/hike/" + hikeId, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!rawAnswer.ok) {
+      alert("loading failed");
+    }
+
+    const answer = await rawAnswer.json();
+    props.loadHike(answer.hike);
+
+    // console.log("COUCOU", answer);
+  };
+
   return (
     <Popover id="popover-basic">
       <Popover.Header as="h3">Randonnées effectuées ici</Popover.Header>
@@ -73,7 +100,11 @@ function popover(placeId: string) {
           <ListGroup defaultActiveKey="#link1">
             {hikesForThisPlace.map((hike) => {
               return (
-                <ListGroup.Item action href="#link1">
+                <ListGroup.Item
+                  action
+                  href="#link1"
+                  onClick={() => loadingHike(hike._id)}
+                >
                   {hike.date}
                 </ListGroup.Item>
               );
@@ -87,9 +118,27 @@ function popover(placeId: string) {
   );
 }
 
-export default function CardPlace(props) {
+function CardPlace(props) {
   const placeData: Place = props.placeData;
   const pictureUrl: string = placeData.picture || "/montain_default.jpg";
+  console.log(">>>>>>>HIKE_SELECTED", props.activeHike);
+
+  const loadHike = (hike) => {
+    // console.log("CACOUUUUU!!!!!!", hike);
+    const hikeToLoad: Hike = {
+      _id: hike._id,
+      durationInMinutes: hike.durationInMinutes,
+      elevationInMeters: hike.elevationInMeters,
+      distanceInMeters: hike.distanceInMeters,
+      startingAltitude: hike.startingAltitude,
+      arrivalAltitude: hike.arrivalAltitude,
+      description: hike.description,
+      date: hike.date,
+      participants: hike.participants,
+      place: hike.place,
+    };
+    props.onLoadHike(hikeToLoad);
+  };
 
   return (
     <Card className="card-place">
@@ -97,7 +146,7 @@ export default function CardPlace(props) {
         <OverlayTrigger
           trigger="click"
           placement="auto"
-          overlay={popover(placeData._id)}
+          overlay={popover({ placeId: placeData._id, loadHike: loadHike })}
           delay={1000}
         >
           <Card.Img
@@ -116,3 +165,22 @@ export default function CardPlace(props) {
     </Card>
   );
 }
+
+function mapStateToProps(state: RootState) {
+  return {
+    activeHike: state.activeHike,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoadHike: (hikeToLoad) => {
+      dispatch({
+        type: "SELECT_HIKE",
+        hike: hikeToLoad,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardPlace);
