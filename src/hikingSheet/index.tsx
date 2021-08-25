@@ -15,40 +15,42 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
 
   return (
     <>
-      <div className="display">
-        <h1 className="hiking-title">Sortie à la Pointe de Chalune</h1>
-        <div className="hiking-box">
-          <img
-            src="/montain_default.jpg"
-            alt="une photo du lieu de la randonée"
-            className="hiking-sheet-image"
-          ></img>
-          <div className="hiking-data">
-            <h3>Dénivelé cumulé: 500m</h3>
-            <h3>Distance: 7km</h3>
-            <h3>Altitude de départ: 1500m</h3>
-            <h3>Altitude d'arrivé: 2000m</h3>
-            <h3>Durée de la sortie: 5h</h3>
-            <h3>Date de la sortie: 27 juillet 2021</h3>
+      {activeHike !== null ? (
+        <div className="display">
+          <h1 className="hiking-title">Sortie à la Pointe de Chalune</h1>
+          <div className="hiking-box">
+            <img
+              src="/montain_default.jpg"
+              alt="une photo du lieu de la randonée"
+              className="hiking-sheet-image"
+            ></img>
+            <div className="hiking-data">
+              <h3>Dénivelé cumulé: {activeHike.elevationInMeters}m</h3>
+              <h3>Distance: {activeHike.distanceInMeters}m</h3>
+              <h3>Altitude de départ: {activeHike.startingAltitude}m</h3>
+              <h3>Altitude d'arrivé: {activeHike.arrivalAltitude}m</h3>
+              <h3>Durée de la sortie: {activeHike.durationInMinutes}min</h3>
+              <h3>Date de la sortie: {activeHike.date}</h3>
+            </div>
+          </div>
+          <div className="hiking-box">
+            <div className="participants-box">
+              <h3 className="hiking-sheet-bottom-title">Participants: </h3>
+              <ListGroup>
+                <ListGroup.Item className="participant">
+                  Julien Hovelaque
+                </ListGroup.Item>
+                <ListGroup.Item>Jean Bon</ListGroup.Item>
+                <ListGroup.Item>Marie Golotte</ListGroup.Item>
+              </ListGroup>
+            </div>
+            <div className="desc-box">
+              <h3 className="hiking-sheet-bottom-title">Description: </h3>
+              <p>C'était très beau et on s'est bien amusé.</p>
+            </div>
           </div>
         </div>
-        <div className="hiking-box">
-          <div className="participants-box">
-            <h3 className="hiking-sheet-bottom-title">Participants: </h3>
-            <ListGroup>
-              <ListGroup.Item className="participant">
-                Julien Hovelaque
-              </ListGroup.Item>
-              <ListGroup.Item>Jean Bon</ListGroup.Item>
-              <ListGroup.Item>Marie Golotte</ListGroup.Item>
-            </ListGroup>
-          </div>
-          <div className="desc-box">
-            <h3 className="hiking-sheet-bottom-title">Description: </h3>
-            <p>C'était très beau et on s'est bien amusé.</p>
-          </div>
-        </div>
-      </div>
+      ) : null}
     </>
   );
 }

@@ -121,7 +121,6 @@ function popover(props) {
 function CardPlace(props) {
   const placeData: Place = props.placeData;
   const pictureUrl: string = placeData.picture || "/montain_default.jpg";
-  console.log(">>>>>>>HIKE_SELECTED", props.activeHike);
 
   const loadHike = (hike) => {
     // console.log("CACOUUUUU!!!!!!", hike);

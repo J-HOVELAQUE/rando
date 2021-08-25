@@ -12,7 +12,6 @@ export default function (
   switch (action.type) {
     case "SELECT_HIKE":
       const newHike: Hike = { ...action.hike };
-      console.log("REDUCER", newHike);
       return newHike;
 
     case "UNSELECT_HIKE":
