@@ -13,7 +13,14 @@ const monthInLetter: string[] = [
   "décembre",
 ];
 
-export default function givePrettyDate(dateToFormat: Date): string {
+export default function givePrettyDate(dateToFormat: Date | string): string {
+  if (typeof dateToFormat === "string") {
+    try {
+      dateToFormat = new Date(dateToFormat);
+    } catch (error) {
+      return "invalid date";
+    }
+  }
   const year = dateToFormat.getFullYear();
   const month = dateToFormat.getMonth();
   const day = dateToFormat.getDate();

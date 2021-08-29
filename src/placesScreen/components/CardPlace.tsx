@@ -11,6 +11,7 @@ import { OutcomeSuccess, OutcomeFailure } from "../../interfaces/outcomes";
 import ListGroup from "react-bootstrap/ListGroup";
 import { connect, DispatchProp } from "react-redux";
 import RootState from "../../reducers/interface";
+import givePrettyDate from "../../services/prettyDate";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
@@ -105,7 +106,7 @@ function popover(props) {
                   href="#link1"
                   onClick={() => loadingHike(hike._id)}
                 >
-                  {hike.date}
+                  {givePrettyDate(hike.date)}
                 </ListGroup.Item>
               );
             })}

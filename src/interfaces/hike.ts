@@ -1,3 +1,5 @@
+import Participant from "./participant";
+
 export interface Hike {
   _id?: string;
   /**
@@ -11,6 +13,6 @@ export interface Hike {
   arrivalAltitude: Number;
   description: String;
   date: Date;
-  participants: string[];
+  participants: Participant[];
   place: string;
 }

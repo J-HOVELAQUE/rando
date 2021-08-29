@@ -3,6 +3,7 @@ import { Hike } from "../interfaces/hike";
 import RootState from "../reducers/interface";
 import "./hikingSheetStyle.css";
 import "../App.css";
+import givePrettyDate from "../services/prettyDate";
 
 import { connect } from "react-redux";
 
@@ -30,13 +31,18 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
               <h3>Altitude de départ: {activeHike.startingAltitude}m</h3>
               <h3>Altitude d'arrivé: {activeHike.arrivalAltitude}m</h3>
               <h3>Durée de la sortie: {activeHike.durationInMinutes}min</h3>
-              <h3>Date de la sortie: {activeHike.date}</h3>
+              <h3>Date de la sortie: {givePrettyDate(activeHike.date)}</h3>
             </div>
           </div>
           <div className="hiking-box">
             <div className="participants-box">
               <h3 className="hiking-sheet-bottom-title">Participants: </h3>
               <ListGroup>
+                {activeHike.participants.map((participant) => {
+                  <ListGroup.Item className="participant">
+                    {`${participant.firstname} ${participant.name}`}
+                  </ListGroup.Item>;
+                })}
                 <ListGroup.Item className="participant">
                   Julien Hovelaque
                 </ListGroup.Item>
