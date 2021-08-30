@@ -11,6 +11,7 @@ import givePrettyDate from "../../../services/prettyDate";
 import getHikesForAPlace from "../../../ajaxHandler/getHikeForAPlace";
 import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
+import CreateNewHikeModal from "./CreateNewHikeModale";
 
 interface CardPlaceProps {
   placeData: Place;
@@ -22,6 +23,8 @@ function CardPlace(props: CardPlaceProps) {
   const pictureUrl: string = placeData.picture || "/montain_default.jpg";
 
   const [hikesForThisPlace, setHikesForThisPlace] = useState<Hike[]>([]);
+  const [createHike, setCreateHike] = useState<boolean>(false);
+  const [showPopover, setShowPopover] = useState<boolean>(false);
 
   const setHikesForThisPlaceInState = async () => {
     if (placeData._id) {
@@ -33,6 +36,14 @@ function CardPlace(props: CardPlaceProps) {
       }
       alert(hikesResponse.errorCode);
     }
+  };
+
+  const handleClose = () => {
+    setCreateHike(false);
+  };
+
+  const togglePopover = () => {
+    setShowPopover(!showPopover);
   };
 
   const popover2 = (
@@ -53,38 +64,53 @@ function CardPlace(props: CardPlaceProps) {
                 </ListGroup.Item>
               );
             })}
+            <ListGroup.Item></ListGroup.Item>
           </ListGroup>
         ) : (
           <p>Aucune</p>
         )}
+        <button
+          onClick={() => {
+            setCreateHike(true);
+            togglePopover();
+          }}
+        >
+          New
+        </button>
       </Popover.Body>
     </Popover>
   );
 
   return (
-    <Card className="card-place">
-      {placeData._id !== undefined ? (
-        <OverlayTrigger
-          trigger="click"
-          placement="auto"
-          overlay={popover2}
-          delay={1000}
-        >
-          <Card.Img
-            variant="top"
-            src={pictureUrl}
-            className="card-place-picture"
-            onClick={() => setHikesForThisPlaceInState()}
-          />
-        </OverlayTrigger>
-      ) : null}
+    <>
+      <CreateNewHikeModal createHike={createHike} handleClose={handleClose} />
 
-      <Card.Body>
-        <Card.Title bsPrefix="card-place-title">{placeData.name}</Card.Title>
-        <Card.Text>Massif: {placeData.mountainLocation}</Card.Text>
-        <Card.Text>Altitude: {placeData.altitudeInMeters}m</Card.Text>
-      </Card.Body>
-    </Card>
+      <Card className="card-place">
+        {placeData._id !== undefined ? (
+          <OverlayTrigger
+            trigger="click"
+            placement="auto"
+            overlay={popover2}
+            delay={1000}
+            show={showPopover}
+            onToggle={togglePopover}
+          >
+            <Card.Img
+              variant="top"
+              src={pictureUrl}
+              className="card-place-picture"
+              onClick={() => setHikesForThisPlaceInState()}
+            />
+          </OverlayTrigger>
+        ) : null}
+
+        <Card.Body>
+          <Card.Title bsPrefix="card-place-title">{placeData.name}</Card.Title>
+          <Card.Text>Massif: {placeData.mountainLocation}</Card.Text>
+          <Card.Text>Altitude: {placeData.altitudeInMeters}m</Card.Text>
+        </Card.Body>
+      </Card>
+    </>
   );
 }
 
