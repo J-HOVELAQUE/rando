@@ -12,6 +12,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { connect, DispatchProp } from "react-redux";
 import RootState from "../../reducers/interface";
 import givePrettyDate from "../../services/prettyDate";
+import getHikesForAPlace from "../ajaxHandler/getHikeForAPlace";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
@@ -19,44 +20,8 @@ function popover(props) {
   const placeId = props.placeId;
   const [hikesForThisPlace, setHikesForThisPlace] = useState<Hike[]>([]);
 
-  const getHikesForThisPlace = async (): Promise<
-    OutcomeFailure | OutcomeSuccess<Hike[]>
-  > => {
-    if (serverUrl === undefined) {
-      return {
-        outcome: "FAILURE",
-        errorCode: "UNKNOW_SERVER",
-      };
-    }
-
-    const rawAnswer: Response = await fetch(
-      serverUrl + "/hike/byPlace/" + placeId,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!rawAnswer.ok) {
-      return {
-        outcome: "FAILURE",
-        errorCode: "NO_SERVER_RESPONSE",
-      };
-    }
-
-    const answer = await rawAnswer.json();
-
-    return {
-      outcome: "SUCCESS",
-      data: answer.hikes,
-    };
-  };
-
   const setHikesForThisPlaceInState = async () => {
-    const hikesResponse = await getHikesForThisPlace();
+    const hikesResponse = await getHikesForAPlace(placeId);
 
     if (hikesResponse.outcome === "SUCCESS") {
       setHikesForThisPlace(hikesResponse.data);
@@ -89,8 +54,6 @@ function popover(props) {
 
     const answer = await rawAnswer.json();
     props.loadHike(answer.hike);
-
-    // console.log("COUCOU", answer);
   };
 
   return (
@@ -123,21 +86,8 @@ function CardPlace(props) {
   const placeData: Place = props.placeData;
   const pictureUrl: string = placeData.picture || "/montain_default.jpg";
 
-  const loadHike = (hike) => {
-    // console.log("CACOUUUUU!!!!!!", hike);
-    const hikeToLoad: Hike = {
-      _id: hike._id,
-      durationInMinutes: hike.durationInMinutes,
-      elevationInMeters: hike.elevationInMeters,
-      distanceInMeters: hike.distanceInMeters,
-      startingAltitude: hike.startingAltitude,
-      arrivalAltitude: hike.arrivalAltitude,
-      description: hike.description,
-      date: hike.date,
-      participants: hike.participants,
-      place: hike.place,
-    };
-    props.onLoadHike(hikeToLoad);
+  const loadHike = (hike: Hike) => {
+    props.onLoadHike(hike);
   };
 
   return (
