@@ -5,7 +5,12 @@ import createPlace from "../ajaxHandler/createPlace";
 
 type SelectedFile = File | null;
 
-export default function CreatePlaceModal(props) {
+interface CreatePlaceModalProps {
+  handleClose: () => void;
+  createPlace: boolean;
+}
+
+export default function CreatePlaceModal(props: CreatePlaceModalProps) {
   const [placeName, setPlaceName] = useState<string>("");
   const [placeAltitude, setPlaceAltitude] = useState<number>(0);
   const [placeMountainLocation, setPlaceMountainLocation] =

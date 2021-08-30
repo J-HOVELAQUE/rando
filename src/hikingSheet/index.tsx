@@ -1,6 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import { Hike } from "../interfaces/hike";
-import RootState from "../reducers/interface";
+import { RootState } from "../reducers/interface";
 import "./hikingSheetStyle.css";
 import "../App.css";
 import givePrettyDate from "../services/prettyDate";
@@ -12,8 +12,6 @@ interface HikingSheetProps {
 }
 
 function HikingSheet({ activeHike }: HikingSheetProps) {
-  console.log(">>>>>>>HIKE_SELECTED", activeHike);
-
   return (
     <>
       {activeHike !== null ? (

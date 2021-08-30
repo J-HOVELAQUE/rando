@@ -5,9 +5,9 @@ import CreatePlaceModal from "./components/CreatePlaceModal";
 import getPlaces from "./ajaxHandler/getPlace";
 import "./placeScreenStyle.css";
 
-export default function PlacesScreen(props) {
+export default function PlacesScreen() {
   const [places, setPlaces] = useState<Place[]>([]);
-  const [createPlace, setCreatePlace] = useState(false);
+  const [createPlace, setCreatePlace] = useState<boolean>(false);
 
   useEffect(() => {
     getPlacesInState();

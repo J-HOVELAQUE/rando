@@ -2,7 +2,14 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import createParticipant from "../ajaxHandler/createParticipant";
 
-export default function CreateParticipantModal(props) {
+interface CreateParticipantModalProps {
+  handleClose: () => void;
+  createParticipant: boolean;
+}
+
+export default function CreateParticipantModal(
+  props: CreateParticipantModalProps
+) {
   const [participantName, setParticipantName] = useState<string>("");
   const [participantFirstname, setParticipantFirstname] = useState<string>("");
   const [participantEmail, setParticipantEmail] = useState<string>("");
@@ -102,18 +109,6 @@ export default function CreateParticipantModal(props) {
               value={participantDateOfBirth?.toDateString() || undefined}
             />
           </label>
-
-          {/* <label className="createPlaceLabel">
-            Image
-            <input
-              type="file"
-              name="file"
-              onChange={(event) => {
-                onChangePictureHandler(event);
-              }}
-              className="createPlaceInput"
-            />
-          </label> */}
         </Modal.Body>
 
         <Modal.Footer>

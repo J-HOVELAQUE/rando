@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import getParticipants from "./ajaxHandler/getParticipants";
 import CreateParticipantModal from "./components/CreateParticipantModal";
 
-export default function ParticipantsScreen(props) {
+export default function ParticipantsScreen() {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [createParticipant, setCreateParticipant] = useState<boolean>(false);
 

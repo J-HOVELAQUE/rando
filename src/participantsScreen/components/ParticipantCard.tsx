@@ -2,9 +2,13 @@ import "./ParticipantCardStyle.css";
 import Participant from "../../interfaces/participant";
 import givePrettyDate from "../../services/prettyDate";
 
-export default function ParticipantCard(props) {
-  const participantData: Participant = props.participantData;
+interface ParticipantCardProps {
+  participantData: Participant;
+}
 
+export default function ParticipantCard({
+  participantData,
+}: ParticipantCardProps) {
   return (
     <div className="participant-card">
       <img
@@ -16,7 +20,6 @@ export default function ParticipantCard(props) {
         <h3>{participantData.name}</h3>
         {participantData.dateOfBirth && (
           <h3>Né le {givePrettyDate(participantData.dateOfBirth)}</h3>
-          // <h3>Né le {typeof participantData.dateOfBirth}</h3>
         )}
       </div>
     </div>
