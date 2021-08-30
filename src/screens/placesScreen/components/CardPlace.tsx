@@ -8,7 +8,7 @@ import { Hike } from "../../../interfaces/hike";
 import ListGroup from "react-bootstrap/ListGroup";
 import { connect } from "react-redux";
 import givePrettyDate from "../../../services/prettyDate";
-import getHikesForAPlace from "../ajaxHandler/getHikeForAPlace";
+import getHikesForAPlace from "../../../ajaxHandler/getHikeForAPlace";
 import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import createParticipant from "../ajaxHandler/createParticipant";
+import createParticipant from "../../../ajaxHandler/createParticipant";
 
 interface CreateParticipantModalProps {
   handleClose: () => void;

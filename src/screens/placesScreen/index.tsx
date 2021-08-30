@@ -2,7 +2,7 @@ import CardPlace from "./components/CardPlace";
 import { Place } from "../../interfaces/place";
 import { useEffect, useState } from "react";
 import CreatePlaceModal from "./components/CreatePlaceModal";
-import getPlaces from "./ajaxHandler/getPlace";
+import getPlaces from "../../ajaxHandler/getPlace";
 import "./placeScreenStyle.css";
 
 export default function PlacesScreen() {

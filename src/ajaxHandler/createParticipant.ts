@@ -1,6 +1,6 @@
-import { OutcomeFailure, OutcomeSuccess } from "../../../interfaces/outcomes";
-import { Place } from "../../../interfaces/place";
-import Participant from "../../../interfaces/participant";
+import { OutcomeFailure, OutcomeSuccess } from "../interfaces/outcomes";
+import { Place } from "../interfaces/place";
+import Participant from "../interfaces/participant";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./createPlaceModalStyle.css";
-import createPlace from "../ajaxHandler/createPlace";
+import createPlace from "../../../ajaxHandler/createPlace";
 
 type SelectedFile = File | null;
 
