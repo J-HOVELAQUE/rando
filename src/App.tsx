@@ -3,12 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { createStore, combineReducers, Store } from "redux";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./home";
-import HikingSheet from "./hikingSheet";
-import PlacesScreen from "./placesScreen";
-import ParticipantsScreen from "./participantsScreen";
+import Home from "./screens/home";
+import HikingSheet from "./screens/hikingSheet";
+import PlacesScreen from "./screens/placesScreen";
+import ParticipantsScreen from "./screens/participantsScreen";
 
-import RandoNavBar from "./randoNavBar/RandoNavBar";
+import RandoNavBar from "./screens/randoNavBar/RandoNavBar";
 
 import activeHike from "./reducers/activeHike";
 

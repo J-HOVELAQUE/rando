@@ -1,6 +1,6 @@
 import "./ParticipantCardStyle.css";
-import Participant from "../../interfaces/participant";
-import givePrettyDate from "../../services/prettyDate";
+import Participant from "../../../interfaces/participant";
+import givePrettyDate from "../../../services/prettyDate";
 
 interface ParticipantCardProps {
   participantData: Participant;

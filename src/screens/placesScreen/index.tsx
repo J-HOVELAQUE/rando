@@ -1,5 +1,5 @@
 import CardPlace from "./components/CardPlace";
-import { Place } from "../interfaces/place";
+import { Place } from "../../interfaces/place";
 import { useEffect, useState } from "react";
 import CreatePlaceModal from "./components/CreatePlaceModal";
 import getPlaces from "./ajaxHandler/getPlace";

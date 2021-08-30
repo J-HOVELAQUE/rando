@@ -1,5 +1,5 @@
 import ParticipantCard from "./components/ParticipantCard";
-import Participant from "../interfaces/participant";
+import Participant from "../../interfaces/participant";
 import { useEffect, useState } from "react";
 import getParticipants from "./ajaxHandler/getParticipants";
 import CreateParticipantModal from "./components/CreateParticipantModal";

@@ -1,9 +1,8 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import { Hike } from "../interfaces/hike";
-import { RootState } from "../reducers/interface";
+import { Hike } from "../../interfaces/hike";
+import { RootState } from "../../reducers/interface";
 import "./hikingSheetStyle.css";
-import "../App.css";
-import givePrettyDate from "../services/prettyDate";
+import givePrettyDate from "../../services/prettyDate";
 
 import { connect } from "react-redux";
 

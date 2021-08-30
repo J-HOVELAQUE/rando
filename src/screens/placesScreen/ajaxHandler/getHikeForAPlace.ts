@@ -1,5 +1,5 @@
-import { OutcomeSuccess, OutcomeFailure } from "../../interfaces/outcomes";
-import { Hike } from "../../interfaces/hike";
+import { OutcomeSuccess, OutcomeFailure } from "../../../interfaces/outcomes";
+import { Hike } from "../../../interfaces/hike";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 

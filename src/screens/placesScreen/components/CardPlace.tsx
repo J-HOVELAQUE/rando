@@ -3,14 +3,14 @@ import "./cardStyle.css";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { useState } from "react";
-import { Place } from "../../interfaces/place";
-import { Hike } from "../../interfaces/hike";
+import { Place } from "../../../interfaces/place";
+import { Hike } from "../../../interfaces/hike";
 import ListGroup from "react-bootstrap/ListGroup";
 import { connect, DispatchProp } from "react-redux";
-import givePrettyDate from "../../services/prettyDate";
+import givePrettyDate from "../../../services/prettyDate";
 import getHikesForAPlace from "../ajaxHandler/getHikeForAPlace";
 import { Dispatch } from "redux";
-import { ISelectHike } from "../../reducers/interface";
+import { ISelectHike } from "../../../reducers/interface";
 
 interface CardPlaceProps {
   placeData: Place;
