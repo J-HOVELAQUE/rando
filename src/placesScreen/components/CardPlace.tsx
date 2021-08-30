@@ -10,7 +10,12 @@ import { connect } from "react-redux";
 import givePrettyDate from "../../services/prettyDate";
 import getHikesForAPlace from "../ajaxHandler/getHikeForAPlace";
 
-function CardPlace(props) {
+interface CardPlaceProps {
+  placeData: Place;
+  onLoadHike: (hike: Hike) => void;
+}
+
+function CardPlace(props: CardPlaceProps) {
   const placeData: Place = props.placeData;
   const pictureUrl: string = placeData.picture || "/montain_default.jpg";
 
@@ -37,6 +42,7 @@ function CardPlace(props) {
             {hikesForThisPlace.map((hike) => {
               return (
                 <ListGroup.Item
+                  key={hike._id}
                   action
                   href="#link1"
                   onClick={() => props.onLoadHike(hike)}
