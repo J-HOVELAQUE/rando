@@ -1,62 +1,34 @@
 import { Card } from "react-bootstrap";
 import "./cardStyle.css";
 import Popover from "react-bootstrap/Popover";
-import PopoverBody from "react-bootstrap/PopoverBody";
-import PopoverHeader from "react-bootstrap/PopoverHeader";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Place } from "../../interfaces/place";
 import { Hike } from "../../interfaces/hike";
-import { OutcomeSuccess, OutcomeFailure } from "../../interfaces/outcomes";
 import ListGroup from "react-bootstrap/ListGroup";
-import { connect, DispatchProp } from "react-redux";
-import RootState from "../../reducers/interface";
+import { connect } from "react-redux";
 import givePrettyDate from "../../services/prettyDate";
 import getHikesForAPlace from "../ajaxHandler/getHikeForAPlace";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
+function CardPlace(props) {
+  const placeData: Place = props.placeData;
+  const pictureUrl: string = placeData.picture || "/montain_default.jpg";
 
-function popover(props) {
-  const placeId = props.placeId;
   const [hikesForThisPlace, setHikesForThisPlace] = useState<Hike[]>([]);
 
   const setHikesForThisPlaceInState = async () => {
-    const hikesResponse = await getHikesForAPlace(placeId);
+    if (placeData._id) {
+      const hikesResponse = await getHikesForAPlace(placeData._id);
 
-    if (hikesResponse.outcome === "SUCCESS") {
-      setHikesForThisPlace(hikesResponse.data);
-      return;
+      if (hikesResponse.outcome === "SUCCESS") {
+        setHikesForThisPlace(hikesResponse.data);
+        return;
+      }
+      alert(hikesResponse.errorCode);
     }
-
-    alert(hikesResponse.errorCode);
   };
 
-  useEffect(() => {
-    setHikesForThisPlaceInState();
-  }, []);
-
-  const loadingHike = async (hikeId: string | undefined) => {
-    if (hikeId === undefined) {
-      return;
-    }
-
-    const rawAnswer: Response = await fetch(serverUrl + "/hike/" + hikeId, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!rawAnswer.ok) {
-      alert("loading failed");
-    }
-
-    const answer = await rawAnswer.json();
-    props.loadHike(answer.hike);
-  };
-
-  return (
+  const popover2 = (
     <Popover id="popover-basic">
       <Popover.Header as="h3">Randonnées effectuées ici</Popover.Header>
       <Popover.Body>
@@ -67,7 +39,7 @@ function popover(props) {
                 <ListGroup.Item
                   action
                   href="#link1"
-                  onClick={() => loadingHike(hike._id)}
+                  onClick={() => props.onLoadHike(hike)}
                 >
                   {givePrettyDate(hike.date)}
                 </ListGroup.Item>
@@ -80,15 +52,6 @@ function popover(props) {
       </Popover.Body>
     </Popover>
   );
-}
-
-function CardPlace(props) {
-  const placeData: Place = props.placeData;
-  const pictureUrl: string = placeData.picture || "/montain_default.jpg";
-
-  const loadHike = (hike: Hike) => {
-    props.onLoadHike(hike);
-  };
 
   return (
     <Card className="card-place">
@@ -96,13 +59,14 @@ function CardPlace(props) {
         <OverlayTrigger
           trigger="click"
           placement="auto"
-          overlay={popover({ placeId: placeData._id, loadHike: loadHike })}
+          overlay={popover2}
           delay={1000}
         >
           <Card.Img
             variant="top"
             src={pictureUrl}
             className="card-place-picture"
+            onClick={() => setHikesForThisPlaceInState()}
           />
         </OverlayTrigger>
       ) : null}
@@ -116,12 +80,6 @@ function CardPlace(props) {
   );
 }
 
-function mapStateToProps(state: RootState) {
-  return {
-    activeHike: state.activeHike,
-  };
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoadHike: (hikeToLoad) => {
@@ -133,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardPlace);
+export default connect(null, mapDispatchToProps)(CardPlace);
