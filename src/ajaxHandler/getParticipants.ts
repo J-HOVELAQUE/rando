@@ -1,10 +1,10 @@
 import { OutcomeFailure, OutcomeSuccess } from "../interfaces/outcomes";
-import Participant from "../interfaces/participant";
+import Participant, { RecordedParticipant } from "../interfaces/participant";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 export default async function getParticipants(): Promise<
-  OutcomeFailure | OutcomeSuccess<Participant[]>
+  OutcomeFailure | OutcomeSuccess<RecordedParticipant[]>
 > {
   if (serverUrl === undefined) {
     return {

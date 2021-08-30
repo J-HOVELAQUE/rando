@@ -1,11 +1,11 @@
 import ParticipantCard from "./components/ParticipantCard";
-import Participant from "../../interfaces/participant";
+import Participant, { RecordedParticipant } from "../../interfaces/participant";
 import { useEffect, useState } from "react";
 import getParticipants from "../../ajaxHandler/getParticipants";
 import CreateParticipantModal from "./components/CreateParticipantModal";
 
 export default function ParticipantsScreen() {
-  const [participants, setParticipants] = useState<Participant[]>([]);
+  const [participants, setParticipants] = useState<RecordedParticipant[]>([]);
   const [createParticipant, setCreateParticipant] = useState<boolean>(false);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function ParticipantsScreen() {
           justifyContent: "center",
         }}
       >
-        {participants.map((participant: Participant) => {
+        {participants.map((participant: RecordedParticipant) => {
           return (
             <ParticipantCard
               key={participant._id}
