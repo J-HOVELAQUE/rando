@@ -1,5 +1,5 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import { Hike } from "../../interfaces/hike";
+import { PopulatedHike } from "../../interfaces/hike";
 import { RootState } from "../../reducers/interface";
 import "./hikingSheetStyle.css";
 import givePrettyDate from "../../services/prettyDate";
@@ -7,7 +7,7 @@ import givePrettyDate from "../../services/prettyDate";
 import { connect } from "react-redux";
 
 interface HikingSheetProps {
-  activeHike: Hike | null;
+  activeHike: PopulatedHike | null;
 }
 
 function HikingSheet({ activeHike }: HikingSheetProps) {
@@ -15,7 +15,7 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
     <>
       {activeHike !== null ? (
         <div className="display">
-          <h1 className="hiking-title">Sortie à la Pointe de Chalune</h1>
+          <h1 className="hiking-title">{activeHike.place.name}</h1>
           <div className="hiking-box">
             <img
               src="/montain_default.jpg"
@@ -35,16 +35,9 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
             <div className="participants-box">
               <h3 className="hiking-sheet-bottom-title">Participants: </h3>
               <ListGroup>
-                {activeHike.participants.map((participant) => {
-                  <ListGroup.Item className="participant">
-                    {`${participant.firstname} ${participant.name}`}
-                  </ListGroup.Item>;
-                })}
-                <ListGroup.Item className="participant">
-                  Julien Hovelaque
-                </ListGroup.Item>
-                <ListGroup.Item>Jean Bon</ListGroup.Item>
-                <ListGroup.Item>Marie Golotte</ListGroup.Item>
+                {activeHike.participants.map((part) => (
+                  <ListGroup>{`${part.firstname} ${part.name}`}</ListGroup>
+                ))}
               </ListGroup>
             </div>
             <div className="desc-box">
