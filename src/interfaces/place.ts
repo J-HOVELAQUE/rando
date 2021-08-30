@@ -1,5 +1,5 @@
 export interface Place {
-  _id?: string;
+  _id: string;
   /**
    * The place may not have id if not already record in database
    */

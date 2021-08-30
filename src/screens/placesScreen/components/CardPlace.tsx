@@ -83,7 +83,12 @@ function CardPlace(props: CardPlaceProps) {
 
   return (
     <>
-      <CreateNewHikeModal createHike={createHike} handleClose={handleClose} />
+      <CreateNewHikeModal
+        createHike={createHike}
+        handleClose={handleClose}
+        placeName={placeData.name}
+        placeId={placeData._id}
+      />
 
       <Card className="card-place">
         {placeData._id !== undefined ? (
