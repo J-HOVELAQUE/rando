@@ -1,11 +1,11 @@
 import { OutcomeFailure, OutcomeSuccess } from "../interfaces/outcomes";
-import Participant from "../interfaces/participant";
+import { Hike } from "../interfaces/hike";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
-export default async function createParticipant(
-  participantToRecord: Participant
-): Promise<OutcomeFailure | OutcomeSuccess<Participant>> {
+export default async function createHike(
+  hikeToRecord: Hike
+): Promise<OutcomeFailure | OutcomeSuccess<Hike>> {
   if (serverUrl === undefined) {
     return {
       outcome: "FAILURE",
@@ -13,13 +13,13 @@ export default async function createParticipant(
     };
   }
 
-  const rawAnswer = await fetch(serverUrl + "/user", {
+  const rawAnswer = await fetch(serverUrl + "/hike", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(participantToRecord),
+    body: JSON.stringify(hikeToRecord),
   });
 
   const answer = await rawAnswer.json();
@@ -34,6 +34,6 @@ export default async function createParticipant(
 
   return {
     outcome: "SUCCESS",
-    data: answer.user,
+    data: answer.hike,
   };
 }

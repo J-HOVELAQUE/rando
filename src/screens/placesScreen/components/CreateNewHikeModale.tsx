@@ -14,33 +14,6 @@ interface CreatePlaceModalProps {
   placeId: string;
 }
 
-interface SelectParticipantComponentProps {
-  onSelectParticipants: (participantsSelected: string[]) => void;
-}
-
-function SelectParticipantComponent(props: SelectParticipantComponentProps) {
-  const [participantsSelected, setParticipantsSelected] = useState<string[]>(
-    []
-  );
-
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
-  return (
-    <Select
-      options={options}
-      isMulti={true}
-      onChange={(event) => {
-        setParticipantsSelected(event.map((opt) => opt.value));
-        props.onSelectParticipants(event.map((opt) => opt.value));
-      }}
-    />
-  );
-}
-
 export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
   const [date, setDate] = useState<string>("");
   const [durationInMinutes, setDurationInMinutes] = useState<string>("");
@@ -52,7 +25,7 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
   const [placeId, setPlaceId] = useState<string>(props.placeId);
   const [participantsId, setParticipantsId] = useState<string[]>([]);
 
-  console.log("CHANGE1", participantsId);
+  // console.log("CHANGE1", participantsId);
 
   // const resetState = (): void => {
   //   setPlaceName("");
@@ -83,7 +56,7 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
       participantsId,
     };
 
-    console.log(newHike);
+    console.log("NEW HIKE >>>>>>>>>>", newHike);
 
     // const recordStatus = await createPlace({
     //   name: placeName,
