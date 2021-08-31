@@ -3,8 +3,20 @@ import { Hike } from "../interfaces/hike";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
+interface HikeToCreate {
+  date: string;
+  durationInMinutes: string;
+  elevationInMeters: string;
+  distanceInMeters: string;
+  startingAltitude: string;
+  arrivalAltitude: string;
+  description: string;
+  place: string;
+  participants: string[];
+}
+
 export default async function createHike(
-  hikeToRecord: Hike
+  hikeToRecord: HikeToCreate
 ): Promise<OutcomeFailure | OutcomeSuccess<Hike>> {
   if (serverUrl === undefined) {
     return {

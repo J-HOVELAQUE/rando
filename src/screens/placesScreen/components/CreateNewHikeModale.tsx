@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./createPlaceModalStyle.css";
-import createPlace from "../../../ajaxHandler/createPlace";
-import { Hike } from "../../../interfaces/hike";
-import Select, { OptionTypeBase } from "react-select";
-import Participant from "../../../interfaces/participant";
 import SelectParticipants from "../../../components/SelectParticipants";
+import createHike from "../../../ajaxHandler/createHike";
 
 interface CreatePlaceModalProps {
   handleClose: () => void;
@@ -25,15 +22,17 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
   const [placeId, setPlaceId] = useState<string>(props.placeId);
   const [participantsId, setParticipantsId] = useState<string[]>([]);
 
-  // console.log("CHANGE1", participantsId);
-
-  // const resetState = (): void => {
-  //   setPlaceName("");
-  //   setPlaceAltitude(0);
-  //   setPlaceMountainLocation("");
-  //   setSelectedFile(null);
-  //   props.handleClose();
-  // };
+  const resetState = (): void => {
+    setDate("");
+    setDurationInMinutes("");
+    setElevationInMeters("");
+    setDistanceInMeters("");
+    setStartingAltitude("");
+    setArrivalAltitude("");
+    setDescription("");
+    setParticipantsId([]);
+    props.handleClose();
+  };
 
   const onSelectParticipants = (selectedParticipants: string[]) => {
     setParticipantsId(selectedParticipants);
@@ -52,25 +51,18 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
       startingAltitude,
       arrivalAltitude,
       description,
-      placeId,
-      participantsId,
+      place: placeId,
+      participants: [...participantsId],
     };
 
-    console.log("NEW HIKE >>>>>>>>>>", newHike);
+    const recordStatus = await createHike(newHike);
 
-    // const recordStatus = await createPlace({
-    //   name: placeName,
-    //   mountainLocation: placeMountainLocation,
-    //   altitudeInMeters: placeAltitude,
-    //   picture: selectedFile,
-    // });
+    if (recordStatus.outcome === "FAILURE") {
+      alert(recordStatus.errorCode + recordStatus.detail);
+      return;
+    }
 
-    // if (recordStatus.outcome === "FAILURE") {
-    //   alert(recordStatus.errorCode + recordStatus.detail);
-    //   return;
-    // }
-
-    // resetState();
+    resetState();
     props.handleClose();
   };
 
@@ -166,7 +158,7 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
         <Modal.Footer>
           <button
             type="button"
-            // onClick={resetState}
+            onClick={resetState}
             className="abortCreatePlaceButton"
           >
             Annuler
