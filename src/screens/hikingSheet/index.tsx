@@ -3,14 +3,24 @@ import { PopulatedHike } from "../../interfaces/hike";
 import { RootState } from "../../reducers/interface";
 import "./hikingSheetStyle.css";
 import givePrettyDate from "../../services/prettyDate";
-
 import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 
 interface HikingSheetProps {
   activeHike: PopulatedHike | null;
 }
 
 function HikingSheet({ activeHike }: HikingSheetProps) {
+  const [picture, setPicture] = useState<string>("/montain_default.jpg");
+
+  useEffect(() => {
+    if (activeHike) {
+      if (activeHike.place.picture) {
+        setPicture(activeHike.place.picture);
+      }
+    }
+  }, []);
+
   return (
     <>
       {activeHike !== null ? (
@@ -18,7 +28,7 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
           <h1 className="hiking-title">{activeHike.place.name}</h1>
           <div className="hiking-box">
             <img
-              src="/montain_default.jpg"
+              src={picture}
               alt="une photo du lieu de la randonée"
               className="hiking-sheet-image"
             ></img>
@@ -44,7 +54,7 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
             </div>
             <div className="desc-box">
               <h3 className="hiking-sheet-bottom-title">Description: </h3>
-              <p>C'était très beau et on s'est bien amusé.</p>
+              <p>{activeHike.description || null}</p>
             </div>
           </div>
         </div>
