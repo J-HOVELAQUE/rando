@@ -1,26 +1,26 @@
-.validateCreatePlaceButton {
+.validate-create-place-button {
   color: white;
   background-color: brown;
   padding: 5px;
   border-radius: 5px;
 }
 
-.abortCreatePlaceButton {
+.abort-create-place-button {
   color: white;
   background-color: grey;
   padding: 5px;
   border-radius: 5px;
 }
 
-.modalTitle {
+.modal-title {
   color: brown;
 }
 
-.createPlaceLabel {
+.create-place-label {
   margin: 10px auto 10px 15px;
 }
 
-.createPlaceInput {
+.create-place-input {
   margin-left: 15px;
   margin-right: 1àpx;
 }

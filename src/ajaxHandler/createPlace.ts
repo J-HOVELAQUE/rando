@@ -5,7 +5,7 @@ const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 interface PlaceToRecord {
   name: string;
-  altitudeInMeters: number;
+  altitudeInMeters: string;
   mountainLocation: string;
   picture: File | null;
 }
@@ -22,7 +22,7 @@ export default async function createPlace(
 
   const data = new FormData();
   data.append("name", placeToRecord.name);
-  data.append("altitudeInMeters", placeToRecord.altitudeInMeters.toString());
+  data.append("altitudeInMeters", placeToRecord.altitudeInMeters);
   data.append("mountainLocation", placeToRecord.mountainLocation);
 
   if (placeToRecord.picture !== null) {

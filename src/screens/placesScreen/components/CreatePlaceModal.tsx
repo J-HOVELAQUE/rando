@@ -12,7 +12,7 @@ interface CreatePlaceModalProps {
 
 export default function CreatePlaceModal(props: CreatePlaceModalProps) {
   const [placeName, setPlaceName] = useState<string>("");
-  const [placeAltitude, setPlaceAltitude] = useState<number>(0);
+  const [placeAltitude, setPlaceAltitude] = useState<string>("");
   const [placeMountainLocation, setPlaceMountainLocation] =
     useState<string>("");
   const [selectedFile, setSelectedFile] = useState<SelectedFile>(null);
@@ -28,7 +28,7 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
 
   const resetState = (): void => {
     setPlaceName("");
-    setPlaceAltitude(0);
+    setPlaceAltitude("");
     setPlaceMountainLocation("");
     setSelectedFile(null);
     props.handleClose();
@@ -63,47 +63,47 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
       keyboard={false}
     >
       <form onSubmit={(e) => onSubmitNewPlace(e)}>
-        <Modal.Header closeButton className="modalHeader">
-          <Modal.Title className="modalTitle">
+        <Modal.Header closeButton>
+          <Modal.Title className="modal-title">
             Ajouter un nouveau lieu
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <label className="createPlaceLabel">
+          <label className="create-place-label">
             Nom
             <input
               type="text"
               placeholder="Nom du nouveau lieu"
               onChange={(e) => setPlaceName(e.target.value)}
-              className="createPlaceInput"
+              className="create-place-input"
               value={placeName}
             />
           </label>
 
-          <label className="createPlaceLabel">
+          <label className="create-place-label">
             Altitude
             <input
               type="number"
-              onChange={(e) => setPlaceAltitude(Number(e.target.value))}
-              className="createPlaceInput"
+              onChange={(e) => setPlaceAltitude(e.target.value)}
+              className="create-place-input"
               value={placeAltitude}
             />
             mètres
           </label>
 
-          <label className="createPlaceLabel">
+          <label className="create-place-label">
             Massif
             <input
               type="text"
               placeholder="Nom du nouveau lieu"
               onChange={(e) => setPlaceMountainLocation(e.target.value)}
-              className="createPlaceInput"
+              className="create-place-input"
               value={placeMountainLocation}
             />
           </label>
 
-          <label className="createPlaceLabel">
+          <label className="create-place-label">
             Image
             <input
               type="file"
@@ -111,7 +111,7 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
               onChange={(event) => {
                 onChangePictureHandler(event);
               }}
-              className="createPlaceInput"
+              className="create-place-input"
             />
           </label>
         </Modal.Body>
@@ -120,11 +120,11 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
           <button
             type="button"
             onClick={resetState}
-            className="abortCreatePlaceButton"
+            className="abort-create-place-button"
           >
             Annuler
           </button>
-          <button className="validateCreatePlaceButton">Créer</button>
+          <button className="validate-create-place-button">Créer</button>
         </Modal.Footer>
       </form>
     </Modal>
