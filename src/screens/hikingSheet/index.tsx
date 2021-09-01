@@ -36,7 +36,9 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
               <h3 className="hiking-sheet-bottom-title">Participants: </h3>
               <ListGroup>
                 {activeHike.participants.map((part) => (
-                  <ListGroup>{`${part.firstname} ${part.name}`}</ListGroup>
+                  <ListGroup.Item
+                    key={part.email}
+                  >{`${part.firstname} ${part.name}`}</ListGroup.Item>
                 ))}
               </ListGroup>
             </div>
