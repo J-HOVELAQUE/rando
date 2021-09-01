@@ -1,11 +1,11 @@
-.validate-create-place-button {
+.validate-modal-button {
   color: white;
   background-color: brown;
   padding: 5px;
   border-radius: 5px;
 }
 
-.abort-create-place-button {
+.abort-modal-button {
   color: white;
   background-color: grey;
   padding: 5px;
@@ -16,11 +16,16 @@
   color: brown;
 }
 
-.create-place-label {
-  margin: 10px auto 10px 15px;
+.modal-label {
+  margin-left: 10px;
 }
 
-.create-place-input {
-  margin-left: 15px;
-  margin-right: 1àpx;
+.modal-input {
+  margin-right: 10px;
+}
+
+.modal-input-area {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
 }

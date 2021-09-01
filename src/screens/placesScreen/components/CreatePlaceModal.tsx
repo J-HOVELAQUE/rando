@@ -70,61 +70,75 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
         </Modal.Header>
 
         <Modal.Body>
-          <label className="create-place-label">
-            Nom
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="name">
+              Nom
+            </label>
             <input
               type="text"
               placeholder="Nom du nouveau lieu"
               onChange={(e) => setPlaceName(e.target.value)}
-              className="create-place-input"
+              className="modal-input"
               value={placeName}
+              id="name"
+              name="name"
             />
-          </label>
+          </div>
 
-          <label className="create-place-label">
-            Altitude
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="altitude">
+              Altitude
+            </label>
             <input
               type="number"
               onChange={(e) => setPlaceAltitude(e.target.value)}
-              className="create-place-input"
+              className="modal-input"
               value={placeAltitude}
+              id="altitude"
+              name="altitude"
             />
-            mètres
-          </label>
+          </div>
 
-          <label className="create-place-label">
-            Massif
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="mountainLocation">
+              Massif
+            </label>
             <input
               type="text"
               placeholder="Nom du nouveau lieu"
               onChange={(e) => setPlaceMountainLocation(e.target.value)}
-              className="create-place-input"
+              className="modal-input"
               value={placeMountainLocation}
+              id="mountainLocation"
+              name="mountainLocation"
             />
-          </label>
+          </div>
 
-          <label className="create-place-label">
-            Image
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="picture">
+              Image
+            </label>
             <input
               type="file"
               name="file"
               onChange={(event) => {
                 onChangePictureHandler(event);
               }}
-              className="create-place-input"
+              className="create-place-file-input"
+              id="picture"
             />
-          </label>
+          </div>
         </Modal.Body>
 
         <Modal.Footer>
           <button
             type="button"
             onClick={resetState}
-            className="abort-create-place-button"
+            className="abort-modal-button"
           >
             Annuler
           </button>
-          <button className="validate-create-place-button">Créer</button>
+          <button className="validate-modal-button">Créer</button>
         </Modal.Footer>
       </form>
     </Modal>
