@@ -1,4 +1,4 @@
-import Select, { OptionTypeBase } from "react-select";
+import Select from "react-select";
 import { useEffect, useState } from "react";
 import getParticipants from "../ajaxHandler/getParticipants";
 import { RecordedParticipant } from "../interfaces/participant";
@@ -19,7 +19,7 @@ export default function SelectParticipants(
 
   useEffect(() => {
     setParticipantsInState();
-  });
+  }, []);
 
   const setParticipantsInState = async () => {
     const getParticipantsResult = await getParticipants();

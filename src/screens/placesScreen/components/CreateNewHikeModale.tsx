@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import SelectParticipants from "../../../components/SelectParticipants";
 import createHike from "../../../ajaxHandler/createHike";
+import "../../../globalStyle/modalStyle.css";
 
 interface CreatePlaceModalProps {
   handleClose: () => void;
@@ -73,84 +74,120 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
       keyboard={false}
     >
       <form onSubmit={(e) => onSubmitNewHike(e)}>
-        <Modal.Header closeButton className="modalHeader">
-          <Modal.Title className="modalTitle">
+        <Modal.Header closeButton>
+          <Modal.Title className="modal-title">
             Ajouter une nouvelle sortie à {props.placeName}
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <label className="create-hike-label">
-            Date
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeDate">
+              Date
+            </label>
             <input
               type="date"
               placeholder="Date de la sortie"
               onChange={(e) => setDate(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={date}
+              id="hikeDate"
+              name="hikeDate"
             />
-          </label>
-          <label className="createPlaceLabel">
-            Durée
+          </div>
+
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeDuration">
+              Durée
+            </label>
             <input
               type="number"
               placeholder="Durée de la sortie"
               onChange={(e) => setDurationInMinutes(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={durationInMinutes}
+              id="hikeDuration"
+              name="hikeDuration"
             />
-            minutes
-          </label>
-          <label className="createPlaceLabel">
-            Dénivelé
+          </div>
+
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeElevation">
+              Dénivelé
+            </label>
             <input
               type="number"
               placeholder="Dénivelé"
               onChange={(e) => setElevationInMeters(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={elevationInMeters}
+              id="hikeElevation"
+              name="hikeElevation"
             />
-          </label>
-          <label className="createPlaceLabel">
-            Distance
+          </div>
+
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeDistance">
+              Distance
+            </label>
             <input
               type="number"
               placeholder="Distance"
               onChange={(e) => setDistanceInMeters(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={distanceInMeters}
+              id="hikeDistance"
+              name="hikeDistance"
             />
-          </label>
-          <label className="createPlaceLabel">
-            Altitude de départ
+          </div>
+
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeElevationDeparture">
+              Altitude de départ
+            </label>
             <input
               type="number"
               placeholder="Altitude de départ"
               onChange={(e) => setStartingAltitude(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={startingAltitude}
+              id="hikeElevationDeparture"
+              name="hikeElevationDeparture"
             />
-          </label>
-          <label className="createPlaceLabel">
-            Altitude de d'arrivée
+          </div>
+
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeElevationArrival">
+              Altitude de d'arrivée
+            </label>
             <input
               type="number"
               placeholder="Altitude de d'arrivée"
               onChange={(e) => setArrivalAltitude(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={arrivalAltitude}
+              id="hikeElevationArrival"
+              name="hikeElevationArrival"
             />
-          </label>
-          <label className="createPlaceLabel">
-            Description
-            <input
-              type="textArea"
+          </div>
+
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="hikeDescription">
+              Description
+            </label>
+            <textarea
               placeholder="Description"
+              rows={5}
+              cols={23}
               onChange={(e) => setDescription(e.target.value)}
-              className="createPlaceInput"
+              className="modal-input"
               value={description}
+              id="hikeDescription"
+              name="hikeDescription"
             />
-          </label>
+          </div>
+
+          <p>Participants :</p>
           <SelectParticipants onSelectParticipants={onSelectParticipants} />
         </Modal.Body>
 
@@ -158,11 +195,11 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
           <button
             type="button"
             onClick={resetState}
-            className="abortCreatePlaceButton"
+            className="abort-modal-button"
           >
             Annuler
           </button>
-          <button className="validateCreatePlaceButton">Créer</button>
+          <button className="validate-modal-button">Créer</button>
         </Modal.Footer>
       </form>
     </Modal>
