@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import createParticipant from "../../../ajaxHandler/createParticipant";
+import "../../../globalStyle/modalStyle.css";
 
 interface CreateParticipantModalProps {
   handleClose: () => void;
@@ -13,16 +14,15 @@ export default function CreateParticipantModal(
   const [participantName, setParticipantName] = useState<string>("");
   const [participantFirstname, setParticipantFirstname] = useState<string>("");
   const [participantEmail, setParticipantEmail] = useState<string>("");
-  const [participantDateOfBirth, setParticipantDateOfBirth] = useState<
-    Date | undefined
-  >();
+  const [participantDateOfBirth, setParticipantDateOfBirth] =
+    useState<string>("");
   const [paticipantPhoto, setParticipantPhoto] = useState<string | undefined>();
 
   const resetState = (): void => {
     setParticipantName("");
     setParticipantFirstname("");
     setParticipantEmail("");
-    setParticipantDateOfBirth(undefined);
+    setParticipantDateOfBirth("");
     setParticipantPhoto(undefined);
     props.handleClose();
   };
@@ -58,68 +58,82 @@ export default function CreateParticipantModal(
     >
       <form onSubmit={(e) => onSubmitNewParticipant(e)}>
         <Modal.Header closeButton className="modalHeader">
-          <Modal.Title className="modalTitle">
+          <Modal.Title className="modal-title">
             Créer un nouveau participant
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <label className="createParticipantLabel">
-            Nom
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="participantName">
+              Nom
+            </label>
             <input
               type="text"
               placeholder="Nom du nouveau participant"
               onChange={(e) => setParticipantName(e.target.value)}
-              className="createParticipantInput"
+              className="modal-input"
               value={participantName}
+              id="participantName"
+              name="participantName"
             />
-          </label>
+          </div>
 
-          <label className="createParticipantLabel">
-            Prénom
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="firstname">
+              Prénom
+            </label>
             <input
               type="text"
               placeholder="Prénom du nouveau participant"
               onChange={(e) => setParticipantFirstname(e.target.value)}
-              className="createParticipantInput"
+              className="modal-input"
               value={participantFirstname}
+              id="firstname"
+              name="firstname"
             />
-          </label>
+          </div>
 
-          <label className="createParticipantLabel">
-            Email
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="email">
+              Email
+            </label>
             <input
               type="email"
               placeholder="Email"
               onChange={(e) => setParticipantEmail(e.target.value)}
-              className="createParticipantInput"
+              className="modal-input"
               value={participantEmail}
+              id="email"
+              name="email"
             />
-          </label>
+          </div>
 
-          <label className="createParticipantLabel">
-            Date de naissance
+          <div className="modal-input-area">
+            <label className="modal-label" htmlFor="birthDate">
+              Date de naissance
+            </label>
             <input
               type="date"
               placeholder="Date de naissance"
-              onChange={(e) =>
-                setParticipantDateOfBirth(new Date(e.target.value))
-              }
-              className="createParticipantInput"
-              value={participantDateOfBirth?.toDateString() || undefined}
+              onChange={(e) => setParticipantDateOfBirth(e.target.value)}
+              className="modal-input"
+              value={participantDateOfBirth || undefined}
+              id="birthDate"
+              name="birthDate"
             />
-          </label>
+          </div>
         </Modal.Body>
 
         <Modal.Footer>
           <button
             type="button"
             onClick={resetState}
-            className="abortCreateParticipantButton"
+            className="abort-modal-button"
           >
             Annuler
           </button>
-          <button className="validateCreateParticipantButton">Créer</button>
+          <button className="validate-modal-button">Créer</button>
         </Modal.Footer>
       </form>
     </Modal>

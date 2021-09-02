@@ -3,8 +3,16 @@ import Participant from "../interfaces/participant";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
+interface ParticipantToCreate {
+  name: string;
+  firstname: string;
+  email: string;
+  dateOfBirth?: string;
+  photo?: string;
+}
+
 export default async function createParticipant(
-  participantToRecord: Participant
+  participantToRecord: ParticipantToCreate
 ): Promise<OutcomeFailure | OutcomeSuccess<Participant>> {
   if (serverUrl === undefined) {
     return {

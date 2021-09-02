@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import "./createPlaceModalStyle.css";
 import SelectParticipants from "../../../components/SelectParticipants";
 import createHike from "../../../ajaxHandler/createHike";
 
