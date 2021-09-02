@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import "../../../globalStyle/modalStyle.css";
 
 import createPlace from "../../../ajaxHandler/createPlace";
@@ -17,6 +18,7 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
   const [placeMountainLocation, setPlaceMountainLocation] =
     useState<string>("");
   const [selectedFile, setSelectedFile] = useState<SelectedFile>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onChangePictureHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -40,6 +42,7 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
   ): Promise<void> => {
     e.preventDefault();
 
+    setIsLoading(true);
     const recordStatus = await createPlace({
       name: placeName,
       mountainLocation: placeMountainLocation,
@@ -48,11 +51,13 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
     });
 
     if (recordStatus.outcome === "FAILURE") {
+      setIsLoading(false);
       alert(recordStatus.errorCode + recordStatus.detail);
       return;
     }
 
     resetState();
+    setIsLoading(false);
     props.handleClose();
   };
 
@@ -139,7 +144,21 @@ export default function CreatePlaceModal(props: CreatePlaceModalProps) {
           >
             Annuler
           </button>
-          <button className="validate-modal-button">Créer</button>
+
+          {isLoading ? (
+            <button className="validate-modal-button" disabled>
+              Créer
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </button>
+          ) : (
+            <button className="validate-modal-button">Créer</button>
+          )}
         </Modal.Footer>
       </form>
     </Modal>
