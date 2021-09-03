@@ -13,6 +13,9 @@ import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
 import CreateNewHikeModal from "./CreateNewHikeModale";
 
+import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
+import { AiOutlinePicture } from "react-icons/ai";
+
 interface CardPlaceProps {
   placeData: Place;
   onLoadHike: (hike: Hike) => void;
@@ -113,6 +116,27 @@ function CardPlace(props: CardPlaceProps) {
           <Card.Title bsPrefix="card-place-title">{placeData.name}</Card.Title>
           <Card.Text>Massif: {placeData.mountainLocation}</Card.Text>
           <Card.Text>Altitude: {placeData.altitudeInMeters}m</Card.Text>
+
+          <div className="card-button-zone">
+            <button className="card-button edit-button" title="Editer">
+              <BsPencil />
+            </button>
+            <button className="card-button delete-button" title="Supprimer">
+              <BsTrash />
+            </button>
+            <button
+              className="card-button picture-button"
+              title="Changer image"
+            >
+              <AiOutlinePicture />
+            </button>
+            <button
+              className="card-button see-hike-button"
+              title="Voir les sorties"
+            >
+              <BsEye />
+            </button>
+          </div>
         </Card.Body>
       </Card>
     </>

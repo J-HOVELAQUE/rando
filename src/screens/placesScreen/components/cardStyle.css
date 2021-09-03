@@ -15,3 +15,22 @@
 .card-place-picture {
   border-radius: 10px 10px 0px 0px;
 }
+
+.card-button-zone {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.card-button {
+  border-radius: 100%;
+  color: brown;
+  border: brown solid 1px;
+  background-color: white;
+}
+
+.card-button:hover {
+  background-color: brown;
+  color: white;
+}
