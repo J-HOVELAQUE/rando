@@ -13,6 +13,7 @@ import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
 import CreateNewHikeModal from "./CreateNewHikeModale";
 import EditPlaceModal from "./EditPlaceModal";
+import deletePlace from "../../../ajaxHandler/deletePlace";
 
 import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
@@ -42,6 +43,15 @@ function CardPlace(props: CardPlaceProps) {
       }
       alert(hikesResponse.errorCode);
     }
+  };
+
+  const onDeletePlace = async () => {
+    const deleteResult = await deletePlace(props.placeData._id);
+    if (deleteResult.outcome === "FAILURE") {
+      alert(deleteResult.detail);
+    }
+
+    props.reloadPlaces();
   };
 
   const handleCloseAllModals = () => {
@@ -141,7 +151,13 @@ function CardPlace(props: CardPlaceProps) {
             >
               <BsPencil />
             </button>
-            <button className="card-button delete-button" title="Supprimer">
+            <button
+              className="card-button delete-button"
+              title="Supprimer"
+              onClick={() => {
+                onDeletePlace();
+              }}
+            >
               <BsTrash />
             </button>
             <button
