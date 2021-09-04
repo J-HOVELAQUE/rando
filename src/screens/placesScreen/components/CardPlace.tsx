@@ -12,6 +12,7 @@ import getHikesForAPlace from "../../../ajaxHandler/getHikeForAPlace";
 import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
 import CreateNewHikeModal from "./CreateNewHikeModale";
+import EditPlaceModal from "./EditPlaceModal";
 
 import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
@@ -27,6 +28,7 @@ function CardPlace(props: CardPlaceProps) {
 
   const [hikesForThisPlace, setHikesForThisPlace] = useState<Hike[]>([]);
   const [createHike, setCreateHike] = useState<boolean>(false);
+  const [editPlace, setEditPlace] = useState<boolean>(false);
   const [showPopover, setShowPopover] = useState<boolean>(false);
 
   const setHikesForThisPlaceInState = async () => {
@@ -41,8 +43,9 @@ function CardPlace(props: CardPlaceProps) {
     }
   };
 
-  const handleClose = () => {
+  const handleCloseAllModals = () => {
     setCreateHike(false);
+    setEditPlace(false);
   };
 
   const togglePopover = () => {
@@ -88,9 +91,17 @@ function CardPlace(props: CardPlaceProps) {
     <>
       <CreateNewHikeModal
         createHike={createHike}
-        handleClose={handleClose}
+        handleClose={handleCloseAllModals}
         placeName={placeData.name}
         placeId={placeData._id}
+      />
+
+      <EditPlaceModal
+        editPlace={editPlace}
+        handleClose={handleCloseAllModals}
+        placeName={props.placeData.name}
+        placeAltitude={props.placeData.altitudeInMeters.toString()}
+        placeMountainLocation={props.placeData.mountainLocation}
       />
 
       <Card className="card-place">
@@ -118,7 +129,13 @@ function CardPlace(props: CardPlaceProps) {
           <Card.Text>Altitude: {placeData.altitudeInMeters}m</Card.Text>
 
           <div className="card-button-zone">
-            <button className="card-button edit-button" title="Editer">
+            <button
+              className="card-button edit-button"
+              title="Editer"
+              onClick={() => {
+                setEditPlace(true);
+              }}
+            >
               <BsPencil />
             </button>
             <button className="card-button delete-button" title="Supprimer">
