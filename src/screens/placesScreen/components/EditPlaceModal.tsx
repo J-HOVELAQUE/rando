@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import "../../../globalStyle/modalStyle.css";
+import editPlace from "../../../ajaxHandler/editPlace";
 
 interface CreatePlaceModalProps {
   handleClose: () => void;
@@ -9,6 +10,7 @@ interface CreatePlaceModalProps {
   placeName: string;
   placeAltitude: string;
   placeMountainLocation: string;
+  placeId: string;
 }
 
 export default function EditPlaceModal(props: CreatePlaceModalProps) {
@@ -20,8 +22,23 @@ export default function EditPlaceModal(props: CreatePlaceModalProps) {
     props.placeMountainLocation
   );
 
-  const onEditPlace = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(">>>>>>>>>>>>>>>>EDIT");
+  const onEditPlace = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+
+    const editStatus = await editPlace(props.placeId, {
+      name: placeName,
+      altitudeInMeters: placeAltitude,
+      mountainLocation: placeMountainLocation,
+    });
+
+    if (editStatus.outcome === "FAILURE") {
+      alert(editStatus.errorCode + editStatus.detail);
+      return;
+    }
+
+    props.handleClose();
   };
 
   return (
@@ -93,7 +110,7 @@ export default function EditPlaceModal(props: CreatePlaceModalProps) {
             Annuler
           </button>
 
-          <button className="validate-modal-button">Créer</button>
+          <button className="validate-modal-button">Update</button>
         </Modal.Footer>
       </form>
     </Modal>

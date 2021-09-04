@@ -20,6 +20,7 @@ import { AiOutlinePicture } from "react-icons/ai";
 interface CardPlaceProps {
   placeData: Place;
   onLoadHike: (hike: Hike) => void;
+  reloadPlaces: () => void;
 }
 
 function CardPlace(props: CardPlaceProps) {
@@ -46,6 +47,7 @@ function CardPlace(props: CardPlaceProps) {
   const handleCloseAllModals = () => {
     setCreateHike(false);
     setEditPlace(false);
+    props.reloadPlaces();
   };
 
   const togglePopover = () => {
@@ -102,6 +104,7 @@ function CardPlace(props: CardPlaceProps) {
         placeName={props.placeData.name}
         placeAltitude={props.placeData.altitudeInMeters.toString()}
         placeMountainLocation={props.placeData.mountainLocation}
+        placeId={props.placeData._id}
       />
 
       <Card className="card-place">

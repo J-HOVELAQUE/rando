@@ -29,6 +29,10 @@ export default function PlacesScreen() {
     getPlacesInState();
   };
 
+  const reloadPlaces = () => {
+    getPlacesInState();
+  };
+
   const handleShow = () => setCreatePlace(true);
 
   return (
@@ -41,7 +45,13 @@ export default function PlacesScreen() {
       </button>
       <div className="card-place-container">
         {places.map((place: Place) => {
-          return <CardPlace key={place._id} placeData={place} />;
+          return (
+            <CardPlace
+              key={place._id}
+              placeData={place}
+              reloadPlaces={reloadPlaces}
+            />
+          );
         })}
       </div>
     </>

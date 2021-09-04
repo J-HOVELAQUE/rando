@@ -1,5 +1,4 @@
 import { OutcomeFailure, OutcomeSuccess } from "../interfaces/outcomes";
-import { Place } from "../interfaces/place";
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
