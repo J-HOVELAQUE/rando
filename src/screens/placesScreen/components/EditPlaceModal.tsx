@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import Spinner from "react-bootstrap/Spinner";
 import "../../../globalStyle/modalStyle.css";
 import editPlace from "../../../ajaxHandler/editPlace";
 
