@@ -1,20 +1,26 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import SelectParticipants from "../../../components/SelectParticipants";
-import editHike from "../../../ajaxHandler/createHike";
+import editHike from "../../../ajaxHandler/editHike";
 import "../../../globalStyle/modalStyle.css";
 import { Hike, PopulatedHike } from "../../../interfaces/hike";
+import activeHike from "../../../reducers/activeHike";
+import { Dispatch } from "redux";
+import { ISelectHike } from "../../../reducers/interface";
+import { connect } from "react-redux";
+import getHikeById from "../../../ajaxHandler/getHikeById";
 
 interface EditPlaceModalProps {
   handleClose: () => void;
   editHike: boolean;
   hikeId: string;
   actualHikeData: PopulatedHike;
+  onLoadHike: (hike: Hike) => void;
 }
 
-export default function EditHikeModal(props: EditPlaceModalProps) {
+function EditHikeModal(props: EditPlaceModalProps) {
   const [date, setDate] = useState<string>(
-    props.actualHikeData.date.toString()
+    props.actualHikeData.date.toString().split("T")[0]
   );
   const [durationInMinutes, setDurationInMinutes] = useState<string>(
     props.actualHikeData.durationInMinutes
@@ -43,10 +49,37 @@ export default function EditHikeModal(props: EditPlaceModalProps) {
     setParticipantsId(selectedParticipants);
   };
 
+  const refreshHikeData = async () => {
+    const loadingResult = await getHikeById(props.hikeId);
+
+    if (loadingResult.outcome === "SUCCESS") {
+      props.onLoadHike(loadingResult.data);
+    }
+  };
+
   const onEditHike = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
+
+    const editStatus = await editHike(props.hikeId, {
+      date: date,
+      durationInMinutes: durationInMinutes,
+      elevationInMeters: elevationInMeters,
+      distanceInMeters: distanceInMeters,
+      startingAltitude: startingAltitude,
+      arrivalAltitude: arrivalAltitude,
+      description: description,
+      participants: participantsId,
+    });
+
+    if (editStatus.outcome === "FAILURE") {
+      alert(editStatus.errorCode + editStatus.detail);
+      return;
+    }
+
+    await refreshHikeData();
+    props.handleClose();
   };
 
   return (
@@ -186,3 +219,16 @@ export default function EditHikeModal(props: EditPlaceModalProps) {
     </Modal>
   );
 }
+
+const mapDispatchToProps = (dispatch: Dispatch<ISelectHike>) => {
+  return {
+    onLoadHike: (hikeToLoad: Hike) => {
+      dispatch({
+        type: "SELECT_HIKE",
+        hike: hikeToLoad,
+      });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(EditHikeModal);
