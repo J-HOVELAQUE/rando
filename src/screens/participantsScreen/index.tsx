@@ -38,7 +38,7 @@ export default function ParticipantsScreen() {
       />
 
       <h1 className="hiking-title">Participants</h1>
-      <button className="add-place-button" onClick={() => handleShow()}>
+      <button className="hiking-button" onClick={() => handleShow()}>
         Créer un nouveau participant
       </button>
 

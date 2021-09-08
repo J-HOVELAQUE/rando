@@ -4,3 +4,11 @@
   margin-bottom: 40px;
   color: brown;
 }
+
+.hiking-button {
+  color: white;
+  background-color: brown;
+  padding: 5px;
+  margin: 0px auto 20px 50px;
+  border-radius: 10px;
+}

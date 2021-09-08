@@ -26,6 +26,9 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
       {activeHike !== null ? (
         <div className="display">
           <h1 className="hiking-title">{activeHike.place.name}</h1>
+          <button className="hiking-button">Editer cette sortie</button>
+          <button className="hiking-button">Supprimer cette sortie</button>
+
           <div className="hiking-box">
             <img
               src={picture}

@@ -40,7 +40,7 @@ export default function PlacesScreen() {
       <CreatePlaceModal createPlace={createPlace} handleClose={handleClose} />
 
       <h1 className="hiking-title">Lieux de randonnée</h1>
-      <button className="add-place-button" onClick={() => handleShow()}>
+      <button className="hiking-button" onClick={() => handleShow()}>
         Ajouter un lieu
       </button>
       <div className="card-place-container">
