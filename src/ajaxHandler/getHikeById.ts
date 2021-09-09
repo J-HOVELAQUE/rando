@@ -1,5 +1,5 @@
 import { OutcomeSuccess, OutcomeFailure } from "../interfaces/outcomes";
-import { Hike, PopulatedHike } from "../interfaces/hike";
+import { PopulatedHike } from "../interfaces/hike";
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 export default async function getHikesById(

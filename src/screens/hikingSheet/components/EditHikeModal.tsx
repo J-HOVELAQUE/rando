@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import SelectParticipants from "../../../components/SelectParticipants";
 import editHike from "../../../ajaxHandler/editHike";
 import "../../../globalStyle/modalStyle.css";
-import { Hike, PopulatedHike } from "../../../interfaces/hike";
+import { PopulatedHike } from "../../../interfaces/hike";
 import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
 import { connect } from "react-redux";

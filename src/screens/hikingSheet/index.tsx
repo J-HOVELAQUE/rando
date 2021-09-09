@@ -8,12 +8,15 @@ import { useState, useEffect } from "react";
 import EditHikeModal from "./components/EditHikeModal";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import deleteHike from "../../ajaxHandler/deleteHike";
+import { IActions } from "../../reducers/interface";
+import { Dispatch } from "redux";
 
 interface HikingSheetProps {
   activeHike: PopulatedHike | null;
+  onUnselectHike: () => void;
 }
 
-function HikingSheet({ activeHike }: HikingSheetProps) {
+function HikingSheet({ activeHike, onUnselectHike }: HikingSheetProps) {
   const [picture, setPicture] = useState<string>("/montain_default.jpg");
   const [editingHike, setEditingHike] = useState<boolean>(false);
   const [confiramtionIsAsked, setConfirmationIsAsked] =
@@ -44,7 +47,10 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
     const deleteResult = await deleteHike(activeHike._id);
     if (deleteResult.outcome === "FAILURE") {
       alert(deleteResult.detail);
+      return;
     }
+
+    onUnselectHike();
   };
 
   return (
@@ -124,4 +130,14 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-export default connect(mapStateToProps, null)(HikingSheet);
+function mapDispatchToProps(dispatch: Dispatch<IActions>) {
+  return {
+    onUnselectHike: () => {
+      dispatch({
+        type: "UNSELECT_HIKE",
+      });
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HikingSheet);

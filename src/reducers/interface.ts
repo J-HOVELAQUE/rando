@@ -2,7 +2,7 @@ import { DefaultRootState } from "react-redux";
 import { Hike, PopulatedHike } from "../interfaces/hike";
 
 export interface RootState extends DefaultRootState {
-  activeHike: Hike | null;
+  activeHike: PopulatedHike | null;
 }
 
 export interface ISelectHike {
