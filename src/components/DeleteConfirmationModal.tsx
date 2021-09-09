@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import "../../../globalStyle/modalStyle.css";
+import "../globalStyle/modalStyle.css";
 
 interface ConfirmationModalProps {
   handleClose: () => void;
@@ -18,7 +18,7 @@ export default function DeleteConfirmationModal(props: ConfirmationModalProps) {
     >
       <Modal.Header closeButton>
         <Modal.Title className="modal-title">
-          Etes-vous certain de vouloir {props.actionNameToValidate}
+          Etes-vous certain de vouloir {props.actionNameToValidate} ?
         </Modal.Title>
       </Modal.Header>
 
@@ -28,7 +28,10 @@ export default function DeleteConfirmationModal(props: ConfirmationModalProps) {
         </button>
         <button
           className="validate-modal-button"
-          onClick={props.deletionConfirmed}
+          onClick={() => {
+            props.deletionConfirmed();
+            props.handleClose();
+          }}
         >
           Valider
         </button>

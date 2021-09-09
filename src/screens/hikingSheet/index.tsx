@@ -6,6 +6,8 @@ import givePrettyDate from "../../services/prettyDate";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import EditHikeModal from "./components/EditHikeModal";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import deleteHike from "../../ajaxHandler/deleteHike";
 
 interface HikingSheetProps {
   activeHike: PopulatedHike | null;
@@ -14,6 +16,8 @@ interface HikingSheetProps {
 function HikingSheet({ activeHike }: HikingSheetProps) {
   const [picture, setPicture] = useState<string>("/montain_default.jpg");
   const [editingHike, setEditingHike] = useState<boolean>(false);
+  const [confiramtionIsAsked, setConfirmationIsAsked] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (activeHike) {
@@ -23,12 +27,24 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
     }
   }, []);
 
-  const handleCloseEditModal = () => {
+  const handleCloseAllModal = () => {
     setEditingHike(false);
+    setConfirmationIsAsked(false);
   };
 
   const handleShowEditModal = () => {
     setEditingHike(true);
+  };
+
+  const onDeleteHike = async () => {
+    if (!activeHike) {
+      return;
+    }
+
+    const deleteResult = await deleteHike(activeHike._id);
+    if (deleteResult.outcome === "FAILURE") {
+      alert(deleteResult.detail);
+    }
   };
 
   return (
@@ -36,10 +52,17 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
       {activeHike !== null ? (
         <>
           <EditHikeModal
-            handleClose={handleCloseEditModal}
+            handleClose={handleCloseAllModal}
             editHike={editingHike}
             hikeId={activeHike._id}
             actualHikeData={activeHike}
+          />
+
+          <DeleteConfirmationModal
+            handleClose={handleCloseAllModal}
+            confiramtionIsAsked={confiramtionIsAsked}
+            deletionConfirmed={onDeleteHike}
+            actionNameToValidate="effacer cette sortie"
           />
 
           <div className="display">
@@ -50,7 +73,12 @@ function HikingSheet({ activeHike }: HikingSheetProps) {
             >
               Editer cette sortie
             </button>
-            <button className="hiking-button">Supprimer cette sortie</button>
+            <button
+              className="hiking-button"
+              onClick={() => setConfirmationIsAsked(true)}
+            >
+              Supprimer cette sortie
+            </button>
 
             <div className="hiking-box">
               <img
