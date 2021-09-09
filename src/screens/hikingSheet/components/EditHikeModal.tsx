@@ -14,7 +14,7 @@ interface EditPlaceModalProps {
   editHike: boolean;
   hikeId: string;
   actualHikeData: PopulatedHike;
-  onLoadHike: (hike: Hike) => void;
+  onLoadHike: (hike: PopulatedHike) => void;
 }
 
 function EditHikeModal(props: EditPlaceModalProps) {
@@ -221,7 +221,7 @@ function EditHikeModal(props: EditPlaceModalProps) {
 
 const mapDispatchToProps = (dispatch: Dispatch<ISelectHike>) => {
   return {
-    onLoadHike: (hikeToLoad: Hike) => {
+    onLoadHike: (hikeToLoad: PopulatedHike) => {
       dispatch({
         type: "SELECT_HIKE",
         hike: hikeToLoad,

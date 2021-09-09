@@ -1,10 +1,10 @@
 import { OutcomeSuccess, OutcomeFailure } from "../interfaces/outcomes";
-import { Hike } from "../interfaces/hike";
+import { Hike, PopulatedHike } from "../interfaces/hike";
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 export default async function getHikesById(
   hikeId: string
-): Promise<OutcomeFailure | OutcomeSuccess<Hike>> {
+): Promise<OutcomeFailure | OutcomeSuccess<PopulatedHike>> {
   if (serverUrl === undefined) {
     return {
       outcome: "FAILURE",

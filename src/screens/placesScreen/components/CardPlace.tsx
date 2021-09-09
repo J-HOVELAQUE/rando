@@ -4,13 +4,13 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { useState } from "react";
 import { Place } from "../../../interfaces/place";
-import { Hike } from "../../../interfaces/hike";
+import { Hike, PopulatedHike } from "../../../interfaces/hike";
 import ListGroup from "react-bootstrap/ListGroup";
 import { connect } from "react-redux";
 import givePrettyDate from "../../../services/prettyDate";
 import getHikesForAPlace from "../../../ajaxHandler/getHikeForAPlace";
 import { Dispatch } from "redux";
-import { ISelectHike } from "../../../reducers/interface";
+import { ISelectHike, IActions } from "../../../reducers/interface";
 import CreateNewHikeModal from "./CreateNewHikeModale";
 import EditPlaceModal from "./EditPlaceModal";
 import deletePlace from "../../../ajaxHandler/deletePlace";
@@ -20,7 +20,7 @@ import { AiOutlinePicture } from "react-icons/ai";
 
 interface CardPlaceProps {
   placeData: Place;
-  onLoadHike: (hike: Hike) => void;
+  onLoadHike: (hike: PopulatedHike) => void;
   reloadPlaces: () => void;
 }
 
@@ -28,7 +28,9 @@ function CardPlace(props: CardPlaceProps) {
   const placeData: Place = props.placeData;
   const pictureUrl: string = placeData.picture || "/montain_default.jpg";
 
-  const [hikesForThisPlace, setHikesForThisPlace] = useState<Hike[]>([]);
+  const [hikesForThisPlace, setHikesForThisPlace] = useState<PopulatedHike[]>(
+    []
+  );
   const [createHike, setCreateHike] = useState<boolean>(false);
   const [editPlace, setEditPlace] = useState<boolean>(false);
   const [showPopover, setShowPopover] = useState<boolean>(false);
@@ -179,9 +181,9 @@ function CardPlace(props: CardPlaceProps) {
   );
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ISelectHike>) => {
+const mapDispatchToProps = (dispatch: Dispatch<IActions>) => {
   return {
-    onLoadHike: (hikeToLoad: Hike) => {
+    onLoadHike: (hikeToLoad: PopulatedHike) => {
       dispatch({
         type: "SELECT_HIKE",
         hike: hikeToLoad,
