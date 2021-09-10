@@ -28,7 +28,7 @@ export default function EditParticipantModal(props: EditParticipantModalProps) {
   );
   const [participantDateOfBirth, setParticipantDateOfBirth] = useState<
     string | undefined
-  >(props.actualParticipantData.dateOfBirth);
+  >(props.actualParticipantData.dateOfBirth?.split("T")[0]);
 
   const onEditParticipant = async (
     e: React.FormEvent<HTMLFormElement>
@@ -113,7 +113,13 @@ export default function EditParticipantModal(props: EditParticipantModalProps) {
         </Modal.Body>
 
         <Modal.Footer>
-          <button type="button" className="abort-modal-button">
+          <button
+            type="button"
+            className="abort-modal-button"
+            onClick={() => {
+              props.handleClose();
+            }}
+          >
             Annuler
           </button>
           <button className="validate-modal-button">Editer</button>

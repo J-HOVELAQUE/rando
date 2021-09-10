@@ -2,7 +2,7 @@ export default interface Participant {
   name: string;
   firstname: string;
   email: string;
-  dateOfBirth?: Date;
+  dateOfBirth?: string;
   photo?: string;
 }
 
