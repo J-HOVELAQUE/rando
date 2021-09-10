@@ -18,3 +18,21 @@
   flex-direction: column;
   justify-content: center;
 }
+.participant-button {
+  border-radius: 100%;
+  color: brown;
+  border: brown solid 1px;
+  background-color: white;
+}
+.participant-button:hover {
+  background-color: brown;
+  color: white;
+}
+
+.participant-button-zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px;
+}
