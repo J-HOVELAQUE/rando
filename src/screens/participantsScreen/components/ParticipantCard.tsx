@@ -1,23 +1,28 @@
 import "./ParticipantCardStyle.css";
-import Participant from "../../../interfaces/participant";
+import Participant, {
+  RecordedParticipant,
+} from "../../../interfaces/participant";
 import givePrettyDate from "../../../services/prettyDate";
 import EditParticipantModal from "./EditParticipantModal";
 import { useState } from "react";
 
-import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
+import { BsPencil, BsTrash } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
 
 interface ParticipantCardProps {
-  participantData: Participant;
+  participantData: RecordedParticipant;
+  refreshParticipantList: () => void;
 }
 
 export default function ParticipantCard({
   participantData,
+  refreshParticipantList,
 }: ParticipantCardProps) {
   const [isEditingParticipant, setIsEditingParticipant] =
     useState<boolean>(false);
 
   const handleClose = () => {
+    refreshParticipantList();
     setIsEditingParticipant(false);
   };
 

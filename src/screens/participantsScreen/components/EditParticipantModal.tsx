@@ -4,6 +4,7 @@ import "../../../globalStyle/modalStyle.css";
 import editParticipant from "../../../ajaxHandler/editParticipant";
 
 interface ActualParticipantData {
+  _id: string;
   name: string;
   firstname: string;
   email: string;
@@ -33,7 +34,24 @@ export default function EditParticipantModal(props: EditParticipantModalProps) {
   const onEditParticipant = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
-    console.log("EDIT>>>>>>>>>");
+    e.preventDefault();
+
+    const updateStatus = await editParticipant(
+      props.actualParticipantData._id,
+      {
+        name: participantName,
+        firstname: participantFirstname,
+        email: participantEmail,
+        dateOfBirth: participantDateOfBirth,
+      }
+    );
+
+    if (updateStatus.outcome === "FAILURE") {
+      alert(updateStatus.errorCode);
+      return;
+    }
+
+    props.handleClose();
   };
 
   return (

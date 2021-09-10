@@ -23,7 +23,7 @@ export default function ParticipantsScreen() {
     alert(participantResponse.errorCode);
   };
 
-  const handleClose = () => {
+  const handleCloseAllModals = () => {
     setCreateParticipant(false);
     getParticipantsInState();
   };
@@ -34,7 +34,7 @@ export default function ParticipantsScreen() {
     <>
       <CreateParticipantModal
         createParticipant={createParticipant}
-        handleClose={handleClose}
+        handleClose={handleCloseAllModals}
       />
 
       <h1 className="hiking-title">Participants</h1>
@@ -55,6 +55,7 @@ export default function ParticipantsScreen() {
             <ParticipantCard
               key={participant._id}
               participantData={participant}
+              refreshParticipantList={getParticipantsInState}
             />
           );
         })}
