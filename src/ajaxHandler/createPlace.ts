@@ -36,6 +36,8 @@ export default async function createPlace(
 
   const answer = await rawAnswer.json();
 
+  console.log(">>>>>>ANSWER", answer);
+
   if (!rawAnswer.ok) {
     return {
       outcome: "FAILURE",

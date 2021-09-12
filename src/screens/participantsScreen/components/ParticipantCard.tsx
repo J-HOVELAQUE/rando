@@ -57,13 +57,7 @@ export default function ParticipantCard({
           >
             <BsPencil />
           </button>
-          <button
-            className="participant-button delete-button"
-            title="Supprimer"
-            onClick={() => {}}
-          >
-            <BsTrash />
-          </button>
+
           <button
             className="participant-button picture-button"
             title="Changer image"
