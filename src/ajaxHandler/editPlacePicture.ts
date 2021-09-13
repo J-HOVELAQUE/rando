@@ -17,7 +17,7 @@ export default async function updatePlacePicture(
   data.append("placePicture", pictureFile);
 
   const rawAnswer = await fetch(serverUrl + "/place/" + placeId + "/picture", {
-    method: "POST",
+    method: "PUT",
     body: data,
   });
   const answer = await rawAnswer.json();

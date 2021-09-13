@@ -14,6 +14,7 @@ import { IActions } from "../../../reducers/interface";
 import CreateNewHikeModal from "./CreateNewHikeModale";
 import EditPlaceModal from "./EditPlaceModal";
 import deletePlace from "../../../ajaxHandler/deletePlace";
+import EditPlacePictureModal from "./EditPlaceModalPicture";
 
 import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
@@ -34,6 +35,8 @@ function CardPlace(props: CardPlaceProps) {
   const [createHike, setCreateHike] = useState<boolean>(false);
   const [editPlace, setEditPlace] = useState<boolean>(false);
   const [showPopover, setShowPopover] = useState<boolean>(false);
+  const [isEditingPlacePicture, setIsEditingPlacePicture] =
+    useState<boolean>(false);
 
   const setHikesForThisPlaceInState = async () => {
     if (placeData._id) {
@@ -59,6 +62,7 @@ function CardPlace(props: CardPlaceProps) {
   const handleCloseAllModals = () => {
     setCreateHike(false);
     setEditPlace(false);
+    setIsEditingPlacePicture(false);
     props.reloadPlaces();
   };
 
@@ -119,6 +123,12 @@ function CardPlace(props: CardPlaceProps) {
         placeId={props.placeData._id}
       />
 
+      <EditPlacePictureModal
+        handleClose={handleCloseAllModals}
+        isEditingPlacePicture={isEditingPlacePicture}
+        placeId={props.placeData._id}
+      />
+
       <Card className="card-place">
         {placeData._id !== undefined ? (
           <OverlayTrigger
@@ -165,6 +175,9 @@ function CardPlace(props: CardPlaceProps) {
             <button
               className="card-button picture-button"
               title="Changer image"
+              onClick={() => {
+                setIsEditingPlacePicture(true);
+              }}
             >
               <AiOutlinePicture />
             </button>
