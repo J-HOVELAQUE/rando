@@ -15,6 +15,7 @@ import CreateNewHikeModal from "./CreateNewHikeModale";
 import EditPlaceModal from "./EditPlaceModal";
 import deletePlace from "../../../ajaxHandler/deletePlace";
 import EditPlacePictureModal from "./EditPlaceModalPicture";
+import { Redirect } from "react-router";
 
 import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
@@ -36,6 +37,8 @@ function CardPlace(props: CardPlaceProps) {
   const [editPlace, setEditPlace] = useState<boolean>(false);
   const [showPopover, setShowPopover] = useState<boolean>(false);
   const [isEditingPlacePicture, setIsEditingPlacePicture] =
+    useState<boolean>(false);
+  const [isRedirectToHikingSheet, setIsRedirectToHikingSheet] =
     useState<boolean>(false);
 
   const setHikesForThisPlaceInState = async () => {
@@ -82,7 +85,10 @@ function CardPlace(props: CardPlaceProps) {
                   key={hike._id}
                   action
                   href="#link1"
-                  onClick={() => props.onLoadHike(hike)}
+                  onClick={() => {
+                    props.onLoadHike(hike);
+                    setIsRedirectToHikingSheet(true);
+                  }}
                 >
                   {givePrettyDate(hike.date)}
                 </ListGroup.Item>
@@ -107,6 +113,8 @@ function CardPlace(props: CardPlaceProps) {
 
   return (
     <>
+      {isRedirectToHikingSheet ? <Redirect to="/rando" /> : null}
+
       <CreateNewHikeModal
         createHike={createHike}
         handleClose={handleCloseAllModals}
