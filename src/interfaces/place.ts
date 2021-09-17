@@ -1,12 +1,16 @@
+type Coordinates = [number, number];
+
+interface Location {
+  type?: "Point";
+  coordinates: Coordinates;
+}
+
 export interface Place {
   _id: string;
-  /**
-   * The place may not have id if not already record in database
-   */
-
   name: string;
   mountainLocation: string;
   altitudeInMeters: number;
   picture?: string;
   city?: string;
+  location: Location;
 }
