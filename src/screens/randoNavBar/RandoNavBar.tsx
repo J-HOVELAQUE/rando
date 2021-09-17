@@ -1,4 +1,4 @@
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "./RandoNavBar.css";
 import { Route, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -7,12 +7,19 @@ export default function RandoNavBar() {
   return (
     <>
       <Navbar variant="dark" className="nav-container-rando">
-        <Link to="/" className="nav-item-rando">
-          Home
-        </Link>
-        <Link to="/lieux" className="nav-item-rando">
-          Lieux
-        </Link>
+        <NavDropdown title="Lieux" id="nav-dropdown">
+          <NavDropdown.Item>
+            <Link to="/lieux" className="nav-item-rando">
+              Liste
+            </Link>
+          </NavDropdown.Item>
+          <NavDropdown.Item>
+            <Link to="/place-map" className="nav-item-rando">
+              Carte
+            </Link>
+          </NavDropdown.Item>
+        </NavDropdown>
+
         <Link to="/rando" className="nav-item-rando">
           Rando
         </Link>
