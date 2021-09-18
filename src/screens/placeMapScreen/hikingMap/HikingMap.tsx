@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import getPlaces from "../../ajaxHandler/getPlace";
+import getPlaces from "../../../ajaxHandler/getPlace";
 import { useState, useEffect } from "react";
 
 interface Coordinates {
@@ -48,9 +48,9 @@ export default function HikingMap() {
   return (
     <MapContainer
       center={[46.132, 6.592]}
-      zoom={13}
-      scrollWheelZoom={false}
-      style={{ height: "1000px" }}
+      zoom={8}
+      scrollWheelZoom={true}
+      style={{ height: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

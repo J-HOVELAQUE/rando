@@ -7,7 +7,7 @@ import Home from "./screens/home";
 import HikingSheet from "./screens/hikingSheet";
 import PlacesScreen from "./screens/placesScreen";
 import ParticipantsScreen from "./screens/participantsScreen";
-import HikingMap from "./screens/hikingMap/HikingMap";
+import HikingMap from "./screens/placeMapScreen/hikingMap/HikingMap";
 import PlaceMapScreen from "./screens/placeMapScreen";
 
 import RandoNavBar from "./screens/randoNavBar/RandoNavBar";
