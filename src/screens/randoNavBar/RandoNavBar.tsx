@@ -7,17 +7,16 @@ export default function RandoNavBar() {
   return (
     <>
       <Navbar variant="dark" className="nav-container-rando">
-        <NavDropdown title="Lieux" id="nav-dropdown">
-          <NavDropdown.Item>
-            <Link to="/lieux" className="nav-item-rando">
+        <NavDropdown title="Lieux" id="nav-dropdown" className="nav-item-rando">
+          <div className="dropdown-body">
+            <Link to="/lieux" className="nav-item-rando-dropdown">
               Liste
             </Link>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <Link to="/place-map" className="nav-item-rando">
+
+            <Link to="/place-map" className="nav-item-rando-dropdown">
               Carte
             </Link>
-          </NavDropdown.Item>
+          </div>
         </NavDropdown>
 
         <Link to="/rando" className="nav-item-rando">

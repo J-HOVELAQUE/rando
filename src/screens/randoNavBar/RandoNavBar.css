@@ -1,5 +1,8 @@
-.nav-item-rando {
+.nav-item-rando,
+.nav-item-rando a,
+.nav-link {
   color: aliceblue;
+  text-decoration: none;
 }
 
 .nav-container-rando {
@@ -7,4 +10,40 @@
   justify-content: space-around;
   align-items: center;
   background-color: brown;
+}
+
+.nav-item-rando-dropdown {
+  color: black !important;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 4px;
+}
+
+.nav-item-rando-dropdown:hover {
+  background-color: white;
+}
+
+.nav-item-rando a:hover,
+.nav-item-rando:hover {
+  color: black;
+}
+
+.nav-item-rando a:active,
+.nav-item-rando:active {
+  color: black;
+}
+
+.nav-item-rando a:focus,
+.nav-item-rando:focus {
+  color: black;
+}
+
+.dropdown-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu {
+  background-color: rgb(235, 233, 233);
 }
