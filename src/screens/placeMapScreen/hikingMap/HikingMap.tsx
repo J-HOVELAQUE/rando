@@ -1,19 +1,20 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import getPlaces from "../../../ajaxHandler/getPlace";
 import { useState, useEffect } from "react";
+import PlaceMarker from "./PlaceMarker";
 
 interface Coordinates {
   lat: number;
   long: number;
 }
 
-interface PlaceMarker {
+interface PlaceMarkerData {
   placeId: string;
   coordinates: Coordinates;
 }
 
 export default function HikingMap() {
-  const [placeMarkers, setPlaceMarkers] = useState<PlaceMarker[]>([]);
+  const [placeMarkers, setPlaceMarkers] = useState<PlaceMarkerData[]>([]);
 
   useEffect(() => {
     const setPlaceMarkerInState = async () => {
@@ -43,8 +44,6 @@ export default function HikingMap() {
     setPlaceMarkerInState();
   }, []);
 
-  console.log("MARKERS", placeMarkers);
-
   return (
     <MapContainer
       center={[46.132, 6.592]}
@@ -56,15 +55,8 @@ export default function HikingMap() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <Marker position={[46.132, 6.592]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker> */}
       {placeMarkers.map((place) => (
-        <Marker position={[place.coordinates.lat, place.coordinates.long]}>
-          <Popup>ID {place.placeId}</Popup>
-        </Marker>
+        <PlaceMarker placeId={place.placeId} coordinates={place.coordinates} />
       ))}
     </MapContainer>
   );
