@@ -3,3 +3,23 @@
   border: brown solid 1px;
   margin: 10px;
 }
+
+.set-location-input-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.set-location-input-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20;
+}
+
+.set-location-input {
+  margin-top: 10px;
+}
+
+.set-location-label {
+  color: brown;
+}
