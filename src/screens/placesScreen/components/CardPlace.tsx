@@ -16,6 +16,7 @@ import EditPlaceModal from "./EditPlaceModal";
 import deletePlace from "../../../ajaxHandler/deletePlace";
 import EditPlacePictureModal from "./EditPlaceModalPicture";
 import { Redirect } from "react-router";
+import EditPlaceLocationModal from "./EditPlaceLocationModal";
 
 import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
@@ -40,6 +41,8 @@ function CardPlace(props: CardPlaceProps) {
   const [isEditingPlacePicture, setIsEditingPlacePicture] =
     useState<boolean>(false);
   const [isRedirectToHikingSheet, setIsRedirectToHikingSheet] =
+    useState<boolean>(false);
+  const [isEditingPlaceLocation, setIsEditingPlaceLocation] =
     useState<boolean>(false);
 
   const setHikesForThisPlaceInState = async () => {
@@ -67,6 +70,7 @@ function CardPlace(props: CardPlaceProps) {
     setCreateHike(false);
     setEditPlace(false);
     setIsEditingPlacePicture(false);
+    setIsEditingPlaceLocation(false);
     props.reloadPlaces();
   };
 
@@ -140,6 +144,12 @@ function CardPlace(props: CardPlaceProps) {
         placeId={props.placeData._id}
       />
 
+      <EditPlaceLocationModal
+        handleClose={handleCloseAllModals}
+        isEditingPlaceLocation={isEditingPlaceLocation}
+        placeData={props.placeData}
+      />
+
       <Card className="card-place">
         {placeData._id !== undefined ? (
           <OverlayTrigger
@@ -198,6 +208,9 @@ function CardPlace(props: CardPlaceProps) {
             <button
               className="card-button see-hike-button"
               title="Changer les coordonnées"
+              onClick={() => {
+                setIsEditingPlaceLocation(true);
+              }}
             >
               <VscLocation />
             </button>
