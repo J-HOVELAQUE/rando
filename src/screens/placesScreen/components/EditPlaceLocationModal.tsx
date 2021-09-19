@@ -4,6 +4,8 @@ import "../../../globalStyle/modalStyle.css";
 import { Place } from "../../../interfaces/place";
 import SetPlaceLocationMap from "./SetPlaceLocationMap";
 import "./editPlaceLocationModalStyle.css";
+import SetPlaceLocation from "../../../ajaxHandler/setPlaceLocation";
+import setPlaceLocation from "../../../ajaxHandler/setPlaceLocation";
 
 interface EditPlaceLocationModalProps {
   handleClose: () => void;
@@ -30,7 +32,23 @@ export default function EditPlaceLocationModal(
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    console.log("SET LOCATION");
+
+    if (!lat || !long) {
+      alert("Coordonnées invalides");
+      return;
+    }
+
+    const setLocationResult = await setPlaceLocation(props.placeData._id, {
+      lat: lat,
+      long: long,
+    });
+
+    if (setLocationResult.outcome === "FAILURE") {
+      alert("Enregistrement échoué");
+      return;
+    }
+
+    props.handleClose();
   };
 
   const onChangeCoordinates = (newCoordinate: ICoordinate) => {
