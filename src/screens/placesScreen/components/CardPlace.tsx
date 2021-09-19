@@ -74,8 +74,10 @@ function CardPlace(props: CardPlaceProps) {
   };
 
   const popover2 = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3">Randonnées effectuées ici</Popover.Header>
+    <Popover id="popover-basic" className="card-place-popover">
+      <Popover.Header as="h3" className="card-place-popover-header">
+        Randonnées effectuées ici
+      </Popover.Header>
       <Popover.Body>
         {hikesForThisPlace.length > 0 ? (
           <ListGroup defaultActiveKey="#link1">
@@ -103,6 +105,7 @@ function CardPlace(props: CardPlaceProps) {
             setCreateHike(true);
             togglePopover();
           }}
+          className="card-place-adding-hike-button"
         >
           New
         </button>

@@ -34,3 +34,17 @@
   background-color: brown;
   color: white;
 }
+
+.card-place-popover-header {
+  color: brown;
+}
+
+.card-place-popover {
+  border: brown solid 1px;
+}
+
+.card-place-adding-hike-button {
+  color: brown;
+  border-radius: 5px;
+  margin: 10px 5px 0px 5px;
+}
