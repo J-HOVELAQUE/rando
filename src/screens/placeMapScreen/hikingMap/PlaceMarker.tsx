@@ -2,6 +2,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./placeMarkerStyle.css";
+import getHikeForAPlace from "../../../ajaxHandler/getHikeForAPlace";
+import prettyDate from "../../../services/prettyDate";
 
 interface Coordinates {
   lat: number;
@@ -10,12 +12,31 @@ interface Coordinates {
 
 interface PlaceMarkerProps {
   placeId: string;
+  placeName: string;
   coordinates: Coordinates;
 }
 
+interface HikeDataForPopup {
+  hikeId: string;
+  hikeDate: string;
+}
+
 export default function PlaceMarker(props: PlaceMarkerProps) {
-  const getPlaceData = () => {
-    console.log("GET DATA");
+  const [hikesForThisPlace, setHikesForThisPlace] = useState<
+    HikeDataForPopup[]
+  >([]);
+
+  const getPlaceData = async () => {
+    const getHikeResult = await getHikeForAPlace(props.placeId);
+    if (getHikeResult.outcome === "FAILURE") {
+      alert("Get hike for this place failed" + getHikeResult.errorCode);
+      return;
+    }
+
+    const usefullHikesData = getHikeResult.data.map((hike) => {
+      return { hikeId: hike._id, hikeDate: prettyDate(hike.date) };
+    });
+    setHikesForThisPlace(usefullHikesData);
   };
 
   return (
@@ -28,14 +49,16 @@ export default function PlaceMarker(props: PlaceMarkerProps) {
       }}
     >
       <Popup>
-        <h6 className="marker-popup-title">ID {props.placeId}</h6>
-        <ListGroup>
-          <ListGroup.Item action>Cras justo odio</ListGroup.Item>
-          <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-          <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-          <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-          <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-        </ListGroup>
+        <h6 className="marker-popup-title">{props.placeName}</h6>
+        {hikesForThisPlace.length === 0 ? (
+          <p>Aucune sortie</p>
+        ) : (
+          <ListGroup>
+            {hikesForThisPlace.map((hike) => (
+              <ListGroup.Item action>{hike.hikeDate}</ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
       </Popup>
     </Marker>
   );

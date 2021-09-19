@@ -94,7 +94,6 @@ function CardPlace(props: CardPlaceProps) {
                 </ListGroup.Item>
               );
             })}
-            <ListGroup.Item></ListGroup.Item>
           </ListGroup>
         ) : (
           <p>Aucune</p>

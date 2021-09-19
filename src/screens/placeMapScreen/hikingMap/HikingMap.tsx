@@ -10,6 +10,7 @@ interface Coordinates {
 
 interface PlaceMarkerData {
   placeId: string;
+  placeName: string;
   coordinates: Coordinates;
 }
 
@@ -31,6 +32,7 @@ export default function HikingMap() {
       const tempPlaceMarkers = filteredPlaces.map((place) => {
         return {
           placeId: place._id,
+          placeName: place.name,
           coordinates: {
             lat: place.location.coordinates[0],
             long: place.location.coordinates[1],
@@ -56,7 +58,11 @@ export default function HikingMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {placeMarkers.map((place) => (
-        <PlaceMarker placeId={place.placeId} coordinates={place.coordinates} />
+        <PlaceMarker
+          placeId={place.placeId}
+          coordinates={place.coordinates}
+          placeName={place.placeName}
+        />
       ))}
     </MapContainer>
   );
