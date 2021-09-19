@@ -19,6 +19,7 @@ import { Redirect } from "react-router";
 
 import { BsPencil, BsTrash, BsEye } from "react-icons/bs";
 import { AiOutlinePicture } from "react-icons/ai";
+import { VscLocation } from "react-icons/vsc";
 
 interface CardPlaceProps {
   placeData: Place;
@@ -173,6 +174,7 @@ function CardPlace(props: CardPlaceProps) {
             >
               <BsPencil />
             </button>
+
             <button
               className="card-button delete-button"
               title="Supprimer"
@@ -182,6 +184,7 @@ function CardPlace(props: CardPlaceProps) {
             >
               <BsTrash />
             </button>
+
             <button
               className="card-button picture-button"
               title="Changer image"
@@ -191,6 +194,14 @@ function CardPlace(props: CardPlaceProps) {
             >
               <AiOutlinePicture />
             </button>
+
+            <button
+              className="card-button see-hike-button"
+              title="Changer les coordonnées"
+            >
+              <VscLocation />
+            </button>
+
             <button
               className="card-button see-hike-button"
               title="Voir les sorties"
