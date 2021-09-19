@@ -11,17 +11,31 @@ interface EditPlaceLocationModalProps {
   placeData: Place;
 }
 
+interface ICoordinate {
+  lat: number;
+  long: number;
+}
+
 export default function EditPlaceLocationModal(
   props: EditPlaceLocationModalProps
 ) {
-  const [lat, setLat] = useState<string>("0");
-  const [long, setLong] = useState<string>("0");
+  const [lat, setLat] = useState<number | undefined>(
+    props.placeData.location.coordinates[0] || undefined
+  );
+  const [long, setLong] = useState<number | undefined>(
+    props.placeData.location.coordinates[1] || undefined
+  );
 
   const onSetNewLocation = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     console.log("SET LOCATION");
+  };
+
+  const onChangeCoordinates = (newCoordinate: ICoordinate) => {
+    setLat(newCoordinate.lat);
+    setLong(newCoordinate.long);
   };
 
   return (
@@ -40,7 +54,11 @@ export default function EditPlaceLocationModal(
 
         <Modal.Body>
           <div className="set-location-map-container">
-            <SetPlaceLocationMap />
+            <SetPlaceLocationMap
+              lat={lat}
+              long={long}
+              changeCoordinates={onChangeCoordinates}
+            />
           </div>
 
           <div className="set-location-input-group">
@@ -50,7 +68,7 @@ export default function EditPlaceLocationModal(
               </label>
               <input
                 type="number"
-                onChange={(e) => setLat(e.target.value)}
+                onChange={(e) => setLat(Number(e.target.value))}
                 className="set-location-input"
                 value={lat}
                 id="latitude"
@@ -64,7 +82,7 @@ export default function EditPlaceLocationModal(
               </label>
               <input
                 type="number"
-                onChange={(e) => setLong(e.target.value)}
+                onChange={(e) => setLong(Number(e.target.value))}
                 className="set-location-input"
                 value={long}
                 id="longitude"
