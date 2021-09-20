@@ -10,6 +10,12 @@ import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import deleteHike from "../../ajaxHandler/deleteHike";
 import { IActions } from "../../reducers/interface";
 import { Dispatch } from "redux";
+import giveInHoursAndMinutes from "../../services/giveInHoursAndMinutes/index";
+
+interface IDurationInHoursAndMinutes {
+  mins: number;
+  hours: number;
+}
 
 interface HikingSheetProps {
   activeHike: PopulatedHike | null;
@@ -21,12 +27,18 @@ function HikingSheet({ activeHike, onUnselectHike }: HikingSheetProps) {
   const [editingHike, setEditingHike] = useState<boolean>(false);
   const [confiramtionIsAsked, setConfirmationIsAsked] =
     useState<boolean>(false);
+  const [hikeDuration, setHikeDuration] = useState<
+    IDurationInHoursAndMinutes | undefined
+  >(undefined);
 
   useEffect(() => {
     if (activeHike) {
       if (activeHike.place.picture) {
         setPicture(activeHike.place.picture);
       }
+      setHikeDuration(
+        giveInHoursAndMinutes(Number(activeHike.durationInMinutes))
+      );
     }
   }, []);
 
@@ -93,11 +105,14 @@ function HikingSheet({ activeHike, onUnselectHike }: HikingSheetProps) {
                 className="hiking-sheet-image"
               ></img>
               <div className="hiking-data">
-                <h3>Dénivelé cumulé: {activeHike.elevationInMeters}m</h3>
-                <h3>Distance: {activeHike.distanceInMeters}m</h3>
-                <h3>Altitude de départ: {activeHike.startingAltitude}m</h3>
-                <h3>Altitude d'arrivé: {activeHike.arrivalAltitude}m</h3>
-                <h3>Durée de la sortie: {activeHike.durationInMinutes}min</h3>
+                <h3>Dénivelé cumulé: {activeHike.elevationInMeters} m</h3>
+                <h3>Distance: {activeHike.distanceInMeters} m</h3>
+                <h3>Altitude de départ: {activeHike.startingAltitude} m</h3>
+                <h3>Altitude d'arrivé: {activeHike.arrivalAltitude} m</h3>
+                <h3>
+                  Durée de la sortie: {hikeDuration?.hours} heures{" "}
+                  {hikeDuration?.mins}
+                </h3>
                 <h3>Date de la sortie: {givePrettyDate(activeHike.date)}</h3>
               </div>
             </div>
