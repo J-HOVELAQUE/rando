@@ -3,87 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import SelectParticipants from "../../../components/SelectParticipants";
 import createHike from "../../../ajaxHandler/createHike";
 import "../../../globalStyle/modalStyle.css";
+import DurationInput from "../../../components/DurationInput";
 
 interface CreatePlaceModalProps {
   handleClose: () => void;
   createHike: boolean;
   placeName: string;
   placeId: string;
-}
-
-interface IDurationInputProps {
-  className: string;
-  returnValueInMinutesOnBlurr: (valueInMinutes: number) => void;
-}
-
-const allowedCharacters = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "0",
-  ":",
-  null,
-];
-
-function DurationInput(props: IDurationInputProps) {
-  const [valueToDisplay, setValueTodisplay] = useState<string>("00:00");
-  const [trueValue, setTrueValue] = useState<string>("00:00");
-
-  const onChangeRecordedValue = () => {
-    const splittedValueToDisplay: string[] = valueToDisplay.split(":");
-
-    if (
-      splittedValueToDisplay.length >= 3 ||
-      splittedValueToDisplay.length < 2
-    ) {
-      setValueTodisplay(trueValue);
-      return;
-    }
-
-    const hoursValue = Number(splittedValueToDisplay[0]);
-    const minutesValue = Number(splittedValueToDisplay[1]);
-
-    const valueInMinutes = hoursValue * 60 + minutesValue;
-
-    const newHoursValue = Math.floor(valueInMinutes / 60);
-    const newMinutesValue = valueInMinutes % 60;
-
-    let displayingMinutes: number | string = newMinutesValue;
-
-    if (displayingMinutes.toString().split("").length === 1) {
-      displayingMinutes = "0" + displayingMinutes.toString();
-    }
-
-    const newValue = `${newHoursValue}:${displayingMinutes}`;
-
-    setValueTodisplay(newValue);
-    setTrueValue(newValue);
-
-    props.returnValueInMinutesOnBlurr(valueInMinutes);
-  };
-
-  return (
-    <input
-      className={props.className}
-      onChange={(e) => {
-        const myEvent: any = e.nativeEvent;
-
-        if (allowedCharacters.includes(myEvent.data)) {
-          setValueTodisplay(e.target.value);
-        }
-      }}
-      onBlur={() => {
-        onChangeRecordedValue();
-      }}
-      value={valueToDisplay}
-    ></input>
-  );
 }
 
 export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
@@ -184,16 +110,6 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
               className="modal-input"
               returnValueInMinutesOnBlurr={onChangeDuration}
             />
-
-            {/* <input
-              type="number"
-              placeholder="Durée de la sortie"
-              onChange={(e) => setDurationInMinutes(e.target.value)}
-              className="modal-input"
-              value={durationInMinutes}
-              id="hikeDuration"
-              name="hikeDuration"
-            /> */}
           </div>
 
           <div className="modal-input-area">
