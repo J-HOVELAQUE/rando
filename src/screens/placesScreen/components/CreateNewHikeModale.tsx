@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import SelectParticipants from "../../../components/SelectParticipants";
 import createHike from "../../../ajaxHandler/createHike";

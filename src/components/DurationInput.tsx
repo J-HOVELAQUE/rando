@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import alarmClockDisplay from "../services/alarmClockDisplay/index";
 
 interface IDurationInputProps {
   className: string;
-  initialDisplayedValue?: string;
+  initialDisplayedValueInMinutes?: string;
   returnValueInMinutesOnBlurr: (valueInMinutes: number) => void;
 }
 
@@ -25,6 +25,15 @@ const allowedCharacters = [
 export default function DurationInput(props: IDurationInputProps) {
   const [valueToDisplay, setValueTodisplay] = useState<string>("00:00");
   const [trueValue, setTrueValue] = useState<string>("00:00");
+
+  useEffect(() => {
+    if (props.initialDisplayedValueInMinutes) {
+      setValueTodisplay(
+        alarmClockDisplay(props.initialDisplayedValueInMinutes)
+      );
+      setTrueValue(alarmClockDisplay(props.initialDisplayedValueInMinutes));
+    }
+  }, []);
 
   const onChangeRecordedValue = () => {
     const splittedValueToDisplay: string[] = valueToDisplay.split(":");

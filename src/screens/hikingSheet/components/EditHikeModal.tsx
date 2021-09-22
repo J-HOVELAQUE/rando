@@ -8,6 +8,7 @@ import { Dispatch } from "redux";
 import { ISelectHike } from "../../../reducers/interface";
 import { connect } from "react-redux";
 import getHikeById from "../../../ajaxHandler/getHikeById";
+import DurationInput from "../../../components/DurationInput";
 
 interface EditPlaceModalProps {
   handleClose: () => void;
@@ -43,6 +44,10 @@ function EditHikeModal(props: EditPlaceModalProps) {
     props.actualHikeData.place._id
   );
   const [participantsId, setParticipantsId] = useState<string[]>([]);
+
+  const onChangeDuration = (valueInMinutes: number) => {
+    setDurationInMinutes(valueInMinutes.toString());
+  };
 
   const onSelectParticipants = (selectedParticipants: string[]) => {
     setParticipantsId(selectedParticipants);
@@ -113,14 +118,13 @@ function EditHikeModal(props: EditPlaceModalProps) {
             <label className="modal-label" htmlFor="hikeDuration">
               Durée
             </label>
-            <input
-              type="number"
-              placeholder="Durée de la sortie"
-              onChange={(e) => setDurationInMinutes(e.target.value)}
+
+            <DurationInput
               className="modal-input"
-              value={durationInMinutes}
-              id="hikeDuration"
-              name="hikeDuration"
+              returnValueInMinutesOnBlurr={onChangeDuration}
+              initialDisplayedValueInMinutes={
+                props.actualHikeData.durationInMinutes
+              }
             />
           </div>
 
