@@ -4,9 +4,6 @@ import SelectParticipants from "../../../components/SelectParticipants";
 import createHike from "../../../ajaxHandler/createHike";
 import "../../../globalStyle/modalStyle.css";
 
-import MomentInput from "react-moment-input";
-import moment from "moment";
-
 interface CreatePlaceModalProps {
   handleClose: () => void;
   createHike: boolean;
@@ -100,19 +97,7 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
           </div>
 
           <div className="modal-input-area">
-            <MomentInput
-              max={moment().add(5, "days")}
-              min={moment()}
-              format="YYYY-MM-DD HH:mm"
-              options={true}
-              readOnly={false}
-              icon={false}
-              onChange={(date: string) => {
-                console.log(date);
-              }}
-            />
-
-            {/* <label className="modal-label" htmlFor="hikeDuration">
+            <label className="modal-label" htmlFor="hikeDuration">
               Durée
             </label>
             <input
@@ -123,7 +108,7 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
               value={durationInMinutes}
               id="hikeDuration"
               name="hikeDuration"
-            /> */}
+            />
           </div>
 
           <div className="modal-input-area">
