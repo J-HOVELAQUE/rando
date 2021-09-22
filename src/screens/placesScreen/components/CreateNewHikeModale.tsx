@@ -11,6 +11,81 @@ interface CreatePlaceModalProps {
   placeId: string;
 }
 
+interface IDurationInputProps {
+  className: string;
+  returnValueInMinutesOnBlurr: (valueInMinutes: number) => void;
+}
+
+const allowedCharacters = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  ":",
+  null,
+];
+
+function DurationInput(props: IDurationInputProps) {
+  const [valueToDisplay, setValueTodisplay] = useState<string>("00:00");
+  const [trueValue, setTrueValue] = useState<string>("00:00");
+
+  const onChangeRecordedValue = () => {
+    const splittedValueToDisplay: string[] = valueToDisplay.split(":");
+
+    if (
+      splittedValueToDisplay.length >= 3 ||
+      splittedValueToDisplay.length < 2
+    ) {
+      setValueTodisplay(trueValue);
+      return;
+    }
+
+    const hoursValue = Number(splittedValueToDisplay[0]);
+    const minutesValue = Number(splittedValueToDisplay[1]);
+
+    const valueInMinutes = hoursValue * 60 + minutesValue;
+
+    const newHoursValue = Math.floor(valueInMinutes / 60);
+    const newMinutesValue = valueInMinutes % 60;
+
+    let displayingMinutes: number | string = newMinutesValue;
+
+    if (displayingMinutes.toString().split("").length === 1) {
+      displayingMinutes = "0" + displayingMinutes.toString();
+    }
+
+    const newValue = `${newHoursValue}:${displayingMinutes}`;
+
+    setValueTodisplay(newValue);
+    setTrueValue(newValue);
+
+    props.returnValueInMinutesOnBlurr(valueInMinutes);
+  };
+
+  return (
+    <input
+      className={props.className}
+      onChange={(e) => {
+        const myEvent: any = e.nativeEvent;
+
+        if (allowedCharacters.includes(myEvent.data)) {
+          setValueTodisplay(e.target.value);
+        }
+      }}
+      onBlur={() => {
+        onChangeRecordedValue();
+      }}
+      value={valueToDisplay}
+    ></input>
+  );
+}
+
 export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
   const [date, setDate] = useState<string>("");
   const [durationInMinutes, setDurationInMinutes] = useState<string>("");
@@ -21,6 +96,10 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
   const [description, setDescription] = useState<string>("");
   const [placeId, setPlaceId] = useState<string>(props.placeId);
   const [participantsId, setParticipantsId] = useState<string[]>([]);
+
+  const onChangeDuration = (valueInMinutes: number) => {
+    setDurationInMinutes(valueInMinutes.toString());
+  };
 
   const resetState = (): void => {
     setDate("");
@@ -100,7 +179,13 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
             <label className="modal-label" htmlFor="hikeDuration">
               Durée
             </label>
-            <input
+
+            <DurationInput
+              className="modal-input"
+              returnValueInMinutesOnBlurr={onChangeDuration}
+            />
+
+            {/* <input
               type="number"
               placeholder="Durée de la sortie"
               onChange={(e) => setDurationInMinutes(e.target.value)}
@@ -108,7 +193,7 @@ export default function CreateNewHikeModal(props: CreatePlaceModalProps) {
               value={durationInMinutes}
               id="hikeDuration"
               name="hikeDuration"
-            />
+            /> */}
           </div>
 
           <div className="modal-input-area">
