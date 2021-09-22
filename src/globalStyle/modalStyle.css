@@ -22,6 +22,8 @@
 
 .modal-input {
   margin-right: 10px;
+  text-align: right;
+  border: grey solid 1px;
 }
 
 .modal-input-area {
