@@ -105,15 +105,66 @@ function HikingSheet({ activeHike, onUnselectHike }: HikingSheetProps) {
                 className="hiking-sheet-image"
               ></img>
               <div className="hiking-data">
-                <h3>Dénivelé cumulé: {activeHike.elevationInMeters} m</h3>
-                <h3>Distance: {activeHike.distanceInMeters} m</h3>
-                <h3>Altitude de départ: {activeHike.startingAltitude} m</h3>
-                <h3>Altitude d'arrivé: {activeHike.arrivalAltitude} m</h3>
-                <h3>
-                  Durée de la sortie: {hikeDuration?.hours} heures{" "}
-                  {hikeDuration?.mins}
-                </h3>
-                <h3>Date de la sortie: {givePrettyDate(activeHike.date)}</h3>
+                <h4>
+                  <strong
+                    style={{
+                      color: "brown",
+                    }}
+                  >
+                    Dénivelé cumulé{" "}
+                  </strong>
+                  : {activeHike.elevationInMeters} m
+                </h4>
+                <h4>
+                  <strong
+                    style={{
+                      color: "brown",
+                    }}
+                  >
+                    Distance{" "}
+                  </strong>
+                  : {activeHike.distanceInMeters} m
+                </h4>
+                <h4>
+                  <strong
+                    style={{
+                      color: "brown",
+                    }}
+                  >
+                    Altitude de départ{" "}
+                  </strong>
+                  : {activeHike.startingAltitude} m
+                </h4>
+                <h4>
+                  <strong
+                    style={{
+                      color: "brown",
+                    }}
+                  >
+                    Altitude d'arrivé{" "}
+                  </strong>
+                  : {activeHike.arrivalAltitude} m
+                </h4>
+                <h4>
+                  <strong
+                    style={{
+                      color: "brown",
+                    }}
+                  >
+                    Durée de la sortie{" "}
+                  </strong>
+                  : {hikeDuration?.hours} heures {hikeDuration?.mins}
+                </h4>
+                <h4>
+                  <strong
+                    style={{
+                      color: "brown",
+                    }}
+                  >
+                    Date de la sortie{" "}
+                  </strong>
+                  : {givePrettyDate(activeHike.date)}
+                </h4>
               </div>
             </div>
             <div className="hiking-box">
