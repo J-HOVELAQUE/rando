@@ -91,7 +91,6 @@ function CardPlace(props: CardPlaceProps) {
                 <ListGroup.Item
                   key={hike._id}
                   action
-                  href="#link1"
                   onClick={() => {
                     props.onLoadHike(hike);
                     setIsRedirectToHikingSheet(true);

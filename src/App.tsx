@@ -2,7 +2,12 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createStore, combineReducers, Store } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  HashRouter,
+} from "react-router-dom";
 import Home from "./screens/home";
 import HikingSheet from "./screens/hikingSheet";
 import PlacesScreen from "./screens/placesScreen";
@@ -19,7 +24,7 @@ const store: Store = createStore(combineReducers({ activeHike }));
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <HashRouter>
         <RandoNavBar />
         <Switch>
           <Route exact={true} path="/" component={Home} />
@@ -28,7 +33,7 @@ function App() {
           <Route path="/participants" component={ParticipantsScreen} />
           <Route path="/place-map" component={PlaceMapScreen} />
         </Switch>
-      </Router>
+      </HashRouter>
     </Provider>
   );
 }
